@@ -1,0 +1,810 @@
+/*
+ * Hoja de estilos principal para El Profesor G
+ * Define la paleta de colores, tipografías y componentes de la interfaz.
+ */
+
+:root {
+  --primary: #1B2A4E;        /* Azul oscuro institucional */
+  --secondary: #C9A13B;      /* Dorado para elementos destacados */
+  --light: #FFFFFF;          /* Blanco para fondo y contraste */
+  --bg: #F7F8FC;             /* Fondo claro para secciones */
+  --text-dark: #1B2A4E;      /* Color de texto principal */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Se utiliza la familia Aptos como tipografía principal en todo el sitio.
+     Incluimos variantes Display y Narrow como respaldo antes de recurrir a fuentes genéricas. */
+  /* Utilizamos exclusivamente la familia Aptos para el texto. En caso de que el navegador
+     no tenga instalada esta fuente propietaria, se utilizará una fuente sans-serif genérica,
+     evitando así recurrir a Times New Roman u otras fuentes serif. */
+  font-family: 'Aptos', 'Aptos Display', 'Aptos Narrow', Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5 {
+  /* Para títulos preferimos variantes de la familia Aptos. */
+  /* Para los títulos usamos variantes de la familia Aptos y, como respaldo, fuentes sans-serif.
+     Se incluye Arial y Helvetica para asegurar un aspecto moderno si Aptos no está disponible. */
+  font-family: 'Aptos Narrow', 'Aptos', 'Aptos Display', Arial, Helvetica, sans-serif;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+  color: var(--primary);
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary);
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+nav .logo img {
+  height: 40px;
+  width: auto;
+  border-radius: 4px;
+}
+
+nav .logo span {
+  line-height: 1;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  color: var(--light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav ul li a:hover {
+  color: var(--secondary);
+}
+
+/* Hero section */
+.hero {
+  /* Diseñamos la sección héroe en dos columnas para que la imagen se muestre al costado
+     y el texto conserve el protagonismo. En pantallas grandes, el contenido y la imagen
+     se distribuyen horizontalmente; en dispositivos pequeños, se apilan verticalmente. */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  background-color: var(--primary);
+  color: var(--light);
+  padding: 80px 20px;
+  overflow: hidden; /* Evita que otros elementos se superpongan o aparezcan detrás de la cabecera */
+}
+
+/*
+ * Configuración de la sección héroe
+ * Para que la imagen destaque y elimine el exceso de espacio vacío, se ajusta el
+ * reparto de columnas mediante flex. El área de texto y el área de imagen se
+ * reparten equitativamente (flex: 1) y se centran los contenidos. Además, se
+ * amplía la imagen al 100 % de su contenedor con un límite razonable de ancho
+ * máximo, permitiendo que la portada sea más impactante en pantallas anchas.
+ */
+.hero .content {
+  flex: 1;
+  max-width: 560px;
+}
+
+.hero .image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Imagen en la sección héroe */
+.hero .image img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: var(--light);
+}
+
+.hero p {
+  font-size: 1.2rem;
+}
+
+.hero .cta-button {
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 12px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 20px;
+  transition: opacity 0.2s;
+}
+
+.hero .cta-button:hover {
+  opacity: 0.9;
+}
+
+
+/* General section styles */
+section {
+  padding: 60px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* About section */
+.about .mission-vision {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.about .mission-vision div {
+  flex: 1 1 250px;
+}
+
+.about .valores ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.about .valores li {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.about .valores i {
+  color: var(--secondary);
+  margin-right: 6px;
+}
+
+/* Services section */
+.services {
+  background-color: var(--bg);
+}
+
+.services .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.service-card {
+  background-color: var(--light);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-card i {
+  font-size: 36px;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.service-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.service-card p {
+  flex-grow: 1;
+  margin-bottom: 15px;
+}
+
+.service-card .btn {
+  align-self: stretch;
+  background-color: var(--primary);
+  color: var(--light);
+  padding: 8px 20px;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.service-card .btn:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+/* Testimonials section */
+.testimonials {
+  background-color: var(--primary);
+  color: var(--light);
+}
+
+.testimonials .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.testimonial-card {
+  background-color: var(--light);
+  color: var(--primary);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.testimonial-card h4 {
+  margin-bottom: 5px;
+}
+
+.testimonial-card small {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.testimonial-card .stars {
+  color: var(--secondary);
+  margin-top: 10px;
+}
+
+/* Visual testimonials grid */
+.testimonial-visual {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.testimonial-visual .visual-heading {
+  font-size: 1.6rem;
+  color: var(--light);
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.testimonial-visual .visual-subheading {
+  color: var(--light);
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.testimonial-visual .visual-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.testimonial-visual .visual-item {
+  flex: 1 1 280px;
+  max-width: 320px;
+}
+
+.testimonial-visual .visual-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Portfolio section */
+.portfolio .carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+.portfolio .carousel img {
+  flex: 0 0 auto;
+  width: 300px;
+  height: auto;
+  scroll-snap-align: start;
+  border-radius: 8px;
+}
+
+.portfolio .universidades-carreras {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.portfolio .universidades-carreras div {
+  flex: 1 1 250px;
+}
+
+.portfolio ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.portfolio li {
+  margin-bottom: 6px;
+}
+
+/* Pricing section (Nuevos precios) */
+.pricing-section {
+  background-color: var(--bg);
+  padding: 60px 20px;
+}
+
+.pricing-section h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.pricing-section .section-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+/* grid for career packages */
+.precios-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.precio-card {
+  background-color: var(--light);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  flex: 1 1 280px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.precio-card .precio-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.precio-card .precio-header i {
+  font-size: 32px;
+  color: var(--secondary);
+}
+
+.precio-card h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+.precio-card .precio-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.precio-card .precio-list li {
+  margin-bottom: 8px;
+}
+
+/* additional services */
+.precios-adicionales {
+  margin-top: 20px;
+}
+
+.precios-adicionales h3 {
+  font-family: 'Aptos Narrow', 'Aptos', 'Aptos Display', sans-serif;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.precios-adicionales .adicionales-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.precios-adicionales .adicionales-list li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+/* notes and deliverables */
+.precios-notas {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
+.precios-notas p {
+  margin-bottom: 10px;
+}
+
+.precios-notas em {
+  display: block;
+  color: var(--primary);
+}
+
+/* CTA button in pricing section */
+.cta-precios {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.cta-precios .cta-precio-btn {
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 12px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+
+.cta-precios .cta-precio-btn:hover {
+  opacity: 0.9;
+}
+
+/* Promotion section */
+.promotion {
+  background-color: var(--primary);
+  color: var(--light);
+  padding: 60px 20px;
+}
+
+/* Contenedor de la sección de promociones y ruleta en columna para asegurar
+   que la ruleta se muestre completa en la siguiente línea y evitar recortes. */
+.promotion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.promotion .info ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.promotion .info ul li::before {
+  content: '\f058'; /* FontAwesome check-circle icon */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  margin-right: 8px;
+  color: var(--secondary);
+}
+
+.promotion img {
+  width: 300px;
+  max-width: 100%;
+  display: block;
+}
+
+/* Ajustes para la sección de promociones */
+/* La información ocupa la anchura disponible pero se limita a un máximo para mantener buena legibilidad.
+   Se agrega un margen inferior para separar la ruleta del texto descriptivo. */
+.promotion .info {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.wheel-wrapper {
+  /* Ajustamos el tamaño del contenedor de la ruleta para que se visualice completa */
+  /* La ruleta ocupa todo el ancho disponible para evitar recortes y se le asigna
+     una altura mínima para mostrar el widget completo sin barras de desplazamiento internas. */
+  /* La ruleta debe ocupar todo el ancho disponible y ajustarse en altura para verse completa.
+     Eliminamos el recorte del contenido para evitar que el widget se corte y permitimos
+     que crezca de forma vertical según su propio contenido. */
+  /* Centramos la ruleta y limitamos su ancho para evitar que se salga de la vista. */
+  /* La ruleta ocupa todo el ancho disponible para evitar cortes y se centra de forma
+     automática. Eliminamos la limitación de ancho máximo para que el widget
+     se ajuste según el contenedor principal. */
+  /* El contenedor de la ruleta se expande a toda la anchura disponible de la página
+     y se centra utilizando flexbox. Al eliminar el límite de anchura máxima se evita
+     que el widget se recorte.  También se establece un mínimo de alto para que
+     la ruleta se muestre completamente sin barras de desplazamiento verticales. */
+  width: 100%;
+  max-width: none;
+  min-height: 750px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .wheel-wrapper {
+    flex-basis: 100%;
+    height: 600px;
+  }
+}
+
+/* Contact section */
+.contact {
+  background-color: var(--bg);
+}
+
+.contact form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.contact form .full {
+  grid-column: 1 / -1;
+}
+
+/* Todos los campos del formulario utilizan la familia Aptos */
+.contact form input,
+.contact form select,
+.contact form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Aptos', 'Aptos Display', 'Aptos Narrow', sans-serif;
+}
+
+.contact form textarea {
+  resize: vertical;
+}
+
+.contact form button {
+  grid-column: 1 / -1;
+  padding: 12px 20px;
+  background-color: var(--primary);
+  color: var(--light);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.contact form button:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+.contact p a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.contact p a:hover {
+  text-decoration: underline;
+}
+
+/* Calendly placeholder section */
+.calendly {
+  padding: 60px 20px;
+  background-color: var(--bg);
+  text-align: center;
+}
+
+.calendly-inline-widget {
+  margin-top: 20px;
+}
+
+/* Promos (Campañas universitarias) */
+.promos {
+  background-color: var(--bg);
+  padding: 60px 20px;
+}
+
+.promos h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.promos p {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.promo-card {
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: var(--light);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.promo-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.promo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+  background-color: var(--primary);
+  color: var(--light);
+  padding: 30px 20px;
+  text-align: center;
+}
+
+footer a {
+  color: var(--secondary);
+  margin: 0 10px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: var(--light);
+}
+
+/* Cookie banner */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--primary);
+  color: var(--light);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9999;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cookie-banner button {
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.cookie-banner button:hover {
+  opacity: 0.85;
+}
+
+/* Floating WhatsApp button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 12px 20px;
+  border-radius: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.whatsapp-float i {
+  font-size: 20px;
+}
+
+.whatsapp-float:hover {
+  background-color: var(--primary);
+  color: var(--light);
+}
+
+@media (max-width: 600px) {
+  .whatsapp-float {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+  .whatsapp-float .whatsapp-text {
+    display: none; /* hide text on small screens to save space */
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .hero .image img {
+    width: 80%;
+    max-width: 400px;
+    margin-top: 30px;
+  }
+  .about .mission-vision {
+    flex-direction: column;
+  }
+  .portfolio .universidades-carreras {
+    flex-direction: column;
+  }
+  .contact form {
+    grid-template-columns: 1fr;
+  }
+  nav ul {
+    gap: 10px;
+  }
+}
