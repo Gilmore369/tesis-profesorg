@@ -151,6 +151,53 @@ document.addEventListener('DOMContentLoaded', function () {
   `;
   document.head.appendChild(style);
 
+  // Agregar estilos para la sección del Ebook
+  style.textContent += `
+    .ebook-section {
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 60px 0;
+      text-align: center;
+    }
+    .ebook-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .ebook-image img {
+      max-width: 260px;
+      width: 100%;
+      border-radius: 8px;
+    }
+    .ebook-info h2 {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+    .ebook-info p {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .big-number {
+      font-size: 1.4rem;
+      color: var(--secondary);
+    }
+    @media (max-width: 768px) {
+      .ebook-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .ebook-info h2 {
+        font-size: 1.5rem;
+      }
+      .big-number {
+        font-size: 1.2rem;
+      }
+    }
+  `;
+
   // Crear el widget de WhatsApp con un encabezado que incluya un botón para cerrar
   const widget = document.createElement('div');
   widget.className = 'chat-widget';
@@ -173,5 +220,32 @@ document.addEventListener('DOMContentLoaded', function () {
     closeIcon.addEventListener('click', function () {
       widget.style.display = 'none';
     });
+  }
+
+  // Crear sección del Ebook y añadirla a la página de inicio y promociones
+  const ebookSection = document.createElement('section');
+  ebookSection.className = 'ebook-section';
+  ebookSection.innerHTML = `
+    <div class="container ebook-container">
+      <div class="ebook-image">
+        <img src="images/ebook_cover.png" alt="Ebook cómo redactar tu tesis" />
+      </div>
+      <div class="ebook-info">
+        <h2>¡Consigue tu Ebook Gratis!</h2>
+        <p>“Cómo redactar tu tesis y no morir en el intento”</p>
+        <p>Envía un mensaje al <strong class="big-number">+51 949 236 975</strong> y solicita tu copia gratuita.</p>
+        <a href="https://wa.me/51949236975?text=Hola,%20quiero%20recibir%20el%20ebook%20gratuito%20sobre%20tesis" class="btn" target="_blank">Solicitar Ebook</a>
+      </div>
+    </div>
+  `;
+  const heroSec = document.querySelector('header.hero');
+  if (heroSec) {
+    heroSec.insertAdjacentElement('afterend', ebookSection);
+  }
+  // También añadir el aviso en la sección de promociones
+  const promoSec = document.querySelector('section.promotion');
+  if (promoSec) {
+    const ebookPromo = ebookSection.cloneNode(true);
+    promoSec.appendChild(ebookPromo);
   }
 });
