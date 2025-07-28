@@ -1,205 +1,128 @@
 /*
  * script.js
  * Funcionalidades para El Profesor G
- * - Gestión de cookies
+ * Gestión de cookies y widget de WhatsApp
  */
 
+// Manejador de cookies
 document.addEventListener('DOMContentLoaded', function () {
   const cookieBanner = document.getElementById('cookie-banner');
   const acceptCookiesBtn = document.getElementById('accept-cookies');
   // Verifica si ya se aceptaron cookies
   if (localStorage.getItem('cookiesAccepted')) {
-    cookieBanner.style.display = 'none';
+    if (cookieBanner) cookieBanner.style.display = 'none';
   }
   // Al hacer clic en aceptar
   if (acceptCookiesBtn) {
     acceptCookiesBtn.addEventListener('click', function () {
       localStorage.setItem('cookiesAccepted', 'true');
-      cookieBanner.style.display = 'none';
+      if (cookieBanner) cookieBanner.style.display = 'none';
     });
   }
 });
 
-
-
-/* Chatbot de WhatsApp */
+/*
+ * Integración de navegación por pestañas y nuevo widget de WhatsApp
+ * Este bloque gestiona el comportamiento de los enlaces de navegación para
+ * funcionar como pestañas sin desplazamiento y agrega un widget simplificado
+ * de WhatsApp al pie de la página. Además, oculta el widget anterior del chatbot.
+ */
 document.addEventListener('DOMContentLoaded', function () {
-  // Create style for chatbot
+  // Configura navegación por pestañas
+  const navLinks = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('header.hero, section');
+
+  function showTab(sectionId) {
+    sections.forEach(sec => {
+      const id = sec.getAttribute('id');
+      if ((id === sectionId) || (sec.tagName.toLowerCase() === 'header' && sectionId === 'inicio')) {
+        sec.style.display = '';
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+    navLinks.forEach(link => {
+      if (link.getAttribute('href').substring(1) === sectionId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = this.getAttribute('href').substring(1);
+      showTab(target);
+    });
+  });
+
+  // Mostrar pestaña inicial
+  showTab('inicio');
+
+  // Crear widget de WhatsApp simplificado y ocultar el anterior
   const style = document.createElement('style');
   style.textContent = `
-    .chatbot-button {
+    /* Oculta el widget anterior del chatbot */
+    .chatbot-button, .chatbot-window { display: none !important; }
+    /* Estilos para el nuevo widget de WhatsApp */
+    .chat-widget {
+      font-family: 'Aptos', sans-serif;
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #25D366;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 9999;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      font-size: 32px;
-    }
-    .chatbot-window {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 300px;
-      max-width: 90vw;
-      height: 400px;
-      background: white;
-      border: 1px solid #ccc;
+      width: 280px;
+      background-color: #ffffff;
       border-radius: 8px;
-      display: none;
-      flex-direction: column;
-      z-index: 9999;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      font-family: 'Aptos', sans-serif;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      z-index: 10000;
     }
-    .chatbot-header {
-      background-color: #1B2A4E;
-      color: white;
-      padding: 10px;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .chatbot-messages {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      background-color: #f5f5f5;
-    }
-    .chatbot-input {
-      display: flex;
-      border-top: 1px solid #ddd;
-    }
-    .chatbot-input input {
-      flex: 1;
-      border: none;
-      padding: 10px;
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-    }
-    .chatbot-input button {
-      background-color: #1B2A4E;
-      color: white;
-      border: none;
-      padding: 0 15px;
-      cursor: pointer;
-    }
-    .chatbot-message {
-      margin-bottom: 10px;
-      max-width: 80%;
+    .chat-widget-header {
+      background-color: #25D366;
+      color: #ffffff;
       padding: 8px 12px;
-      border-radius: 12px;
-      line-height: 1.4;
+      font-weight: bold;
+    }
+    .chat-widget-body {
+      padding: 12px;
+      background-color: #f7f7f7;
+    }
+    .chat-widget-body .bot-message {
+      background-color: #e4f6e8;
+      border-radius: 6px;
+      padding: 8px 10px;
+      color: #333333;
+      margin-bottom: 8px;
       font-size: 14px;
     }
-    .chatbot-message.user {
-      background-color: #d1e7ff;
-      align-self: flex-end;
+    .chat-widget-footer {
+      padding: 8px 12px 12px 12px;
+      text-align: right;
     }
-    .chatbot-message.bot {
-      background-color: #e9e9e9;
-      align-self: flex-start;
+    .chat-widget-footer .chat-btn {
+      display: inline-block;
+      background-color: #25D366;
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
     }
   `;
   document.head.appendChild(style);
 
-  // Create elements
-  const button = document.createElement('div');
-  button.className = 'chatbot-button';
-  button.textContent = '💬';
-
-  const windowDiv = document.createElement('div');
-  windowDiv.className = 'chatbot-window';
-
-  const header = document.createElement('div');
-  header.className = 'chatbot-header';
-  header.textContent = 'Chat con El Profe G';
-  const closeBtn = document.createElement('span');
-  closeBtn.style.cursor = 'pointer';
-  closeBtn.textContent = '✕';
-  header.appendChild(closeBtn);
-
-  const messages = document.createElement('div');
-  messages.className = 'chatbot-messages';
-
-  const inputArea = document.createElement('div');
-  inputArea.className = 'chatbot-input';
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.placeholder = 'Escribe tu pregunta...';
-  const sendBtn = document.createElement('button');
-  sendBtn.textContent = 'Enviar';
-  inputArea.appendChild(input);
-  inputArea.appendChild(sendBtn);
-
-  windowDiv.appendChild(header);
-  windowDiv.appendChild(messages);
-  windowDiv.appendChild(inputArea);
-
-  document.body.appendChild(button);
-  document.body.appendChild(windowDiv);
-
-  function appendMessage(text, sender) {
-    const msgDiv = document.createElement('div');
-    msgDiv.className = 'chatbot-message ' + sender;
-    msgDiv.textContent = text;
-    messages.appendChild(msgDiv);
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  // initial greeting
-  appendMessage('Hola, soy el Chatbot de El Profe G. ¿En qué puedo ayudarte?', 'bot');
-
-  function getResponse(query) {
-    const text = query.toLowerCase();
-    if (text.includes('precio') || text.includes('costo') || text.includes('precios')) {
-      return 'Ofrecemos diferentes paquetes según la carrera: Ingeniería Industrial y Administración. Consulta la sección de precios para más detalles.';
-    }
-    if (text.includes('servicio') || text.includes('servicios')) {
-      return 'Brindamos asesorías completas de tesis, redacción por capítulos, informes de prácticas, artículos científicos, corrección de estilo, diseño de presentaciones, y más.';
-    }
-    if (text.includes('pago') || text.includes('forma de pago') || text.includes('pagos')) {
-      return 'Aceptamos pagos a través de Yape, Plin, transferencias y PayPal.';
-    }
-    if (text.includes('tiempo') || text.includes('entrega')) {
-      return 'El tiempo de entrega varía según el servicio. Contáctanos para más detalles.';
-    }
-    return 'Gracias por tu mensaje. Un asesor se pondrá en contacto contigo pronto.';
-  }
-
-  function sendMessage() {
-    const userText = input.value.trim();
-    if (!userText) return;
-    appendMessage(userText, 'user');
-    const response = getResponse(userText);
-    setTimeout(() => {
-      appendMessage(response, 'bot');
-    }, 600);
-    input.value = '';
-  }
-
-  button.addEventListener('click', () => {
-    windowDiv.style.display = windowDiv.style.display === 'flex' || windowDiv.style.display === 'block' ? 'none' : 'flex';
-  });
-
-  closeBtn.addEventListener('click', () => {
-    windowDiv.style.display = 'none';
-  });
-
-  sendBtn.addEventListener('click', sendMessage);
-  input.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      sendMessage();
-    }
-  });
+  const widget = document.createElement('div');
+  widget.className = 'chat-widget';
+  widget.innerHTML = `
+    <div class="chat-widget-header">WhatsApp</div>
+    <div class="chat-widget-body">
+      <div class="bot-message">¡Hola! ¿En qué podemos ayudarte con tu tesis?</div>
+    </div>
+    <div class="chat-widget-footer">
+      <a class="chat-btn" href="https://wa.me/51949236795?text=Hola,%20quisiera%20más%20información%20sobre%20las%20asesorías%20de%20tesis" target="_blank">Comenzar Chat</a>
+    </div>
+  `;
+  document.body.appendChild(widget);
 });
