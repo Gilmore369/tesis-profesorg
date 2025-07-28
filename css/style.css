@@ -32,7 +32,8 @@ body {
 h1, h2, h3, h4, h5 {
   /* Para títulos preferimos variantes de la familia Aptos. */
   /* Para los títulos usamos variantes de la familia Aptos y, como respaldo, fuentes sans-serif.
-     Se incluye Arial y Helvetica para asegurar un aspecto moderno si Aptos no está disponible. */
+
+  Se incluye Arial y Helvetica para asegurar un aspecto moderno si Aptos no está disponible. */
   font-family: 'Aptos Narrow', 'Aptos', 'Aptos Display', Arial, Helvetica, sans-serif;
   margin-top: 0;
   margin-bottom: 0.5em;
@@ -807,4 +808,45 @@ footer a:hover {
   nav ul {
     gap: 10px;
   }
+}
+/* Dropdown navigation for Servicios y Precios */
+nav ul li.dropdown {
+  position: relative;
+}
+
+nav ul li .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--primary);
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+}
+
+nav ul li .dropdown-content a {
+  display: block;
+  padding: 10px 15px;
+  color: var(--light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+nav ul li .dropdown-content a:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+nav ul li.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Active navigation link state */
+nav ul li a.active {
+  color: var(--secondary);
+  font-weight: bold;
 }
