@@ -61,6 +61,36 @@ document.addEventListener('DOMContentLoaded', function () {
   // Mostrar pestaña inicial
   showTab('inicio');
 
+  // Generar menús desplegables para "Servicios" y "Precios" programáticamente
+  const serviciosLink = document.querySelector('nav ul li a[href="#servicios"]');
+  if (serviciosLink) {
+    const serviciosLi = serviciosLink.parentElement;
+    serviciosLi.classList.add('dropdown');
+    const serviciosDropdown = document.createElement('div');
+    serviciosDropdown.className = 'dropdown-content';
+    serviciosDropdown.innerHTML = `
+      <a href="#servicios">Asesoría completa</a>
+      <a href="#servicios">Informes y prácticas</a>
+      <a href="#servicios">Artículos y monografías</a>
+      <a href="#servicios">Corrección y similitud</a>
+      <a href="#servicios">Presentaciones y defensa</a>
+    `;
+    serviciosLi.appendChild(serviciosDropdown);
+  }
+  const preciosLink = document.querySelector('nav ul li a[href="#precios"]');
+  if (preciosLink) {
+    const preciosLi = preciosLink.parentElement;
+    preciosLi.classList.add('dropdown');
+    const preciosDropdown = document.createElement('div');
+    preciosDropdown.className = 'dropdown-content';
+    preciosDropdown.innerHTML = `
+      <a href="#precios">Ingeniería Industrial</a>
+      <a href="#precios">Administración</a>
+      <a href="#precios">Servicios adicionales</a>
+    `;
+    preciosLi.appendChild(preciosDropdown);
+  }
+
   // Crear widget de WhatsApp simplificado y ocultar el anterior
   const style = document.createElement('style');
   style.textContent = `
@@ -83,7 +113,15 @@ document.addEventListener('DOMContentLoaded', function () {
       background-color: #25D366;
       color: #ffffff;
       padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chat-title {
       font-weight: bold;
+    }
+    .chat-close {
+      cursor: pointer;
     }
     .chat-widget-body {
       padding: 12px;
@@ -113,10 +151,14 @@ document.addEventListener('DOMContentLoaded', function () {
   `;
   document.head.appendChild(style);
 
+  // Crear el widget de WhatsApp con un encabezado que incluya un botón para cerrar
   const widget = document.createElement('div');
   widget.className = 'chat-widget';
   widget.innerHTML = `
-    <div class="chat-widget-header">WhatsApp</div>
+    <div class="chat-widget-header">
+      <span class="chat-title">WhatsApp</span>
+      <span class="chat-close">✕</span>
+    </div>
     <div class="chat-widget-body">
       <div class="bot-message">¡Hola! ¿En qué podemos ayudarte con tu tesis?</div>
     </div>
@@ -125,4 +167,11 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   `;
   document.body.appendChild(widget);
+  // Funcionalidad para cerrar el widget al hacer clic en la '✕'
+  const closeIcon = widget.querySelector('.chat-close');
+  if (closeIcon) {
+    closeIcon.addEventListener('click', function () {
+      widget.style.display = 'none';
+    });
+  }
 });
