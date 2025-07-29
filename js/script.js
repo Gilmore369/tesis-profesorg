@@ -29,18 +29,22 @@ document.addEventListener('DOMContentLoaded', function () {
  */
 document.addEventListener('DOMContentLoaded', function () {
   // Configura navegación por pestañas
-  const navLinks = document.querySelectorAll('nav a');
-  const sections = document.querySelectorAll('header.hero, section');
-
+  // Se vuelven a seleccionar los enlaces de navegación cada vez que se hace clic,
+  // para incluir cualquier elemento agregado dinámicamente (como la pestaña Campañas).
   function showTab(sectionId) {
+    // Obtiene dinámicamente todas las secciones (incluyendo las añadidas posteriormente)
+    const sections = document.querySelectorAll('header.hero, section');
     sections.forEach(sec => {
       const id = sec.getAttribute('id');
+      // Muestra el héroe cuando sectionId es 'inicio'
       if ((id === sectionId) || (sec.tagName.toLowerCase() === 'header' && sectionId === 'inicio')) {
         sec.style.display = '';
       } else {
         sec.style.display = 'none';
       }
     });
+    // Actualiza estados activos en navegación
+    const navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => {
       if (link.getAttribute('href').substring(1) === sectionId) {
         link.classList.add('active');
@@ -50,46 +54,102 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = this.getAttribute('href').substring(1);
-      showTab(target);
+  // Asigna manejadores de clic para enlaces de navegación
+  function attachNavHandlers() {
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = this.getAttribute('href').substring(1);
+        showTab(target);
+      });
     });
-  });
+  }
+
+  attachNavHandlers();
 
   // Mostrar pestaña inicial
   showTab('inicio');
 
-  // Generar menús desplegables para "Servicios" y "Precios" programáticamente
-  const serviciosLink = document.querySelector('nav ul li a[href="#servicios"]');
-  if (serviciosLink) {
-    const serviciosLi = serviciosLink.parentElement;
-    serviciosLi.classList.add('dropdown');
-    const serviciosDropdown = document.createElement('div');
-    serviciosDropdown.className = 'dropdown-content';
-    serviciosDropdown.innerHTML = `
-      <a href="#servicios">Asesoría completa</a>
-      <a href="#servicios">Informes y prácticas</a>
-      <a href="#servicios">Artículos y monografías</a>
-      <a href="#servicios">Corrección y similitud</a>
-      <a href="#servicios">Presentaciones y defensa</a>
-    `;
-    serviciosLi.appendChild(serviciosDropdown);
-  }
-  const preciosLink = document.querySelector('nav ul li a[href="#precios"]');
-  if (preciosLink) {
-    const preciosLi = preciosLink.parentElement;
-    preciosLi.classList.add('dropdown');
-    const preciosDropdown = document.createElement('div');
-    preciosDropdown.className = 'dropdown-content';
-    preciosDropdown.innerHTML = `
-      <a href="#precios">Ingeniería Industrial</a>
-      <a href="#precios">Administración</a>
-      <a href="#precios">Servicios adicionales</a>
-    `;
-    preciosLi.appendChild(preciosDropdown);
-  }
+  /**
+   * Inserta dinámicamente la sección de campañas universitarias y el enlace en la navegación.
+   * Esto se hace después de inicializar la navegación para que las nuevas secciones queden
+   * incluidas en el comportamiento de pestañas.
+   */
+  (function createCampaignsSection() {
+    const navList = document.querySelector('nav ul');
+    if (!navList) return;
+    // Comprobar si ya existe el enlace de campañas para evitar duplicados
+    if (!navList.querySelector('a[href="#campanas"]')) {
+      // Crear nuevo elemento de navegación
+      const liCampanas = document.createElement('li');
+      const aCampanas = document.createElement('a');
+      aCampanas.href = '#campanas';
+      aCampanas.textContent = 'Campañas';
+      liCampanas.appendChild(aCampanas);
+      // Insertar antes del elemento de precios (si existe) para ubicarlo lógicamente
+      const preciosLink = navList.querySelector('a[href="#precios"]');
+      if (preciosLink && preciosLink.parentNode) {
+        navList.insertBefore(liCampanas, preciosLink.parentNode);
+      } else {
+        navList.appendChild(liCampanas);
+      }
+    }
+
+    // Crear sección de campañas
+    // Solo si aún no existe
+    if (!document.getElementById('campanas')) {
+      const campanasSection = document.createElement('section');
+      campanasSection.id = 'campanas';
+      campanasSection.className = 'promos';
+      campanasSection.innerHTML = `
+        <div class="container">
+          <h2>Campañas universitarias</h2>
+          <p>Conoce algunas de las campañas promocionales que hemos realizado en colaboración con diversas universidades. Estas imágenes reflejan nuestra presencia y compromiso con la comunidad académica en Ingeniería Industrial, Administración y otras carreras.</p>
+          <div class="promo-grid">
+            <div class="promo-card">
+              <img src="images/campana_ucv.jpg" alt="Campaña UCV – El Profesor G llegó a la UCV" />
+              <p><strong>UCV – Proyecto de investigación:</strong> El Profesor G llegó a la Universidad César Vallejo para impulsar proyectos de investigación en Administración e Ingeniería Industrial. ¡Consulta al 949 236 795!</p>
+            </div>
+            <div class="promo-card">
+              <img src="images/campana_upn_tranqui.jpg" alt="Campaña UPN – Tranqui UPN" />
+              <p><strong>UPN – Tranqui, El Profe G te salva:</strong> Asesoramos Tesis 1 y Tesis 2 en la Universidad Privada del Norte con la metodología G. Te acompañamos paso a paso.</p>
+            </div>
+            <div class="promo-card">
+              <img src="images/campana_asesoramiento.jpg" alt="Campaña de asesoramiento de tesis" />
+              <p><strong>Asesoramiento multidisciplinario:</strong> Proyectos de investigación, monografías, tesis 1, tesis 2 y tesis de titulación para Ingeniería Industrial, Administración y Marketing.</p>
+            </div>
+            <div class="promo-card">
+              <img src="images/campana_asesoria_ucv.jpg" alt="Campaña UCV – Asesoría de tesis" />
+              <p><strong>UCV – Asesoría de tesis:</strong> Asesoría integral en proyectos de investigación, monografías y tesis para estudiantes de Ingeniería Industrial, Administración y Marketing.</p>
+            </div>
+            <div class="promo-card">
+              <img src="images/campana_asesoria_upao.jpg" alt="Campaña UPAO – Asesoría de proyectos" />
+              <p><strong>UPAO – Proyectos de tesis:</strong> Apoyo especializado para estudiantes de UPAO en proyectos de investigación, monografías, tesis 1, tesis 2 y tesis de titulación.</p>
+            </div>
+            <div class="promo-card">
+              <img src="images/campana_desesperado_upao.jpg" alt="Campaña UPAO – Desesperado por tu investigación" />
+              <p><strong>UPAO – ¿Desesperado por tu tema?</strong> No te preocupes, El Profe G te ayuda en proyectos de investigación, monografías y tesis de titulación con un enfoque personalizado.</p>
+            </div>
+            <div class="promo-card">
+              <img src="images/campana_cupo_upn.jpg" alt="Campaña UPN – Separa tu cupo" />
+              <p><strong>UPN – Separa tu cupo:</strong> Reserva tu lugar en Tesis 1 y Tesis 2 con asesoría especializada del Profe G. ¡Prepárate y asegura tu éxito académico!</p>
+            </div>
+          </div>
+        </div>
+      `;
+      // Insertar la sección antes de precios
+      const preciosSection = document.getElementById('precios');
+      if (preciosSection && preciosSection.parentNode) {
+        preciosSection.parentNode.insertBefore(campanasSection, preciosSection);
+      } else {
+        document.body.appendChild(campanasSection);
+      }
+    }
+
+    // Reconfigurar manejadores de navegación para incluir la nueva pestaña
+    attachNavHandlers();
+  })();
 
   // Crear widget de WhatsApp simplificado y ocultar el anterior
   const style = document.createElement('style');
@@ -113,15 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
       background-color: #25D366;
       color: #ffffff;
       padding: 8px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .chat-title {
       font-weight: bold;
-    }
-    .chat-close {
-      cursor: pointer;
     }
     .chat-widget-body {
       padding: 12px;
@@ -151,61 +203,10 @@ document.addEventListener('DOMContentLoaded', function () {
   `;
   document.head.appendChild(style);
 
-  // Agregar estilos para la sección del Ebook
-  style.textContent += `
-    .ebook-section {
-      background-color: var(--primary);
-      color: #ffffff;
-      padding: 60px 0;
-      text-align: center;
-    }
-    .ebook-container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .ebook-image img {
-      max-width: 260px;
-      width: 100%;
-      border-radius: 8px;
-    }
-    .ebook-info h2 {
-      font-size: 1.8rem;
-      color: var(--secondary);
-      margin-bottom: 10px;
-    }
-    .ebook-info p {
-      font-size: 1.1rem;
-      margin-bottom: 0.8rem;
-    }
-    .big-number {
-      font-size: 1.4rem;
-      color: var(--secondary);
-    }
-    @media (max-width: 768px) {
-      .ebook-container {
-        flex-direction: column;
-        text-align: center;
-      }
-      .ebook-info h2 {
-        font-size: 1.5rem;
-      }
-      .big-number {
-        font-size: 1.2rem;
-      }
-    }
-  `;
-
-  // Crear el widget de WhatsApp con un encabezado que incluya un botón para cerrar
   const widget = document.createElement('div');
   widget.className = 'chat-widget';
   widget.innerHTML = `
-    <div class="chat-widget-header">
-      <span class="chat-title">WhatsApp</span>
-      <span class="chat-close">✕</span>
-    </div>
+    <div class="chat-widget-header">WhatsApp</div>
     <div class="chat-widget-body">
       <div class="bot-message">¡Hola! ¿En qué podemos ayudarte con tu tesis?</div>
     </div>
@@ -214,38 +215,4 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   `;
   document.body.appendChild(widget);
-  // Funcionalidad para cerrar el widget al hacer clic en la '✕'
-  const closeIcon = widget.querySelector('.chat-close');
-  if (closeIcon) {
-    closeIcon.addEventListener('click', function () {
-      widget.style.display = 'none';
-    });
-  }
-
-  // Crear sección del Ebook y añadirla a la página de inicio y promociones
-  const ebookSection = document.createElement('section');
-  ebookSection.className = 'ebook-section';
-  ebookSection.innerHTML = `
-    <div class="container ebook-container">
-      <div class="ebook-image">
-        <img src="images/ebook_cover.png" alt="Ebook cómo redactar tu tesis" />
-      </div>
-      <div class="ebook-info">
-        <h2>¡Consigue tu Ebook Gratis!</h2>
-        <p>“Cómo redactar tu tesis y no morir en el intento”</p>
-        <p>Envía un mensaje al <strong class="big-number">+51 949 236 975</strong> y solicita tu copia gratuita.</p>
-        <a href="https://wa.me/51949236975?text=Hola,%20quiero%20recibir%20el%20ebook%20gratuito%20sobre%20tesis" class="btn" target="_blank">Solicitar Ebook</a>
-      </div>
-    </div>
-  `;
-  const heroSec = document.querySelector('header.hero');
-  if (heroSec) {
-    heroSec.insertAdjacentElement('afterend', ebookSection);
-  }
-  // También añadir el aviso en la sección de promociones
-  const promoSec = document.querySelector('section.promotion');
-  if (promoSec) {
-    const ebookPromo = ebookSection.cloneNode(true);
-    promoSec.appendChild(ebookPromo);
-  }
 });
