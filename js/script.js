@@ -864,4 +864,449 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
     document.head.appendChild(pricingStyle);
   })();
+
+  /**
+   * Inicializa la sección de servicios con tarjetas tipo glassmorphism, animaciones suaves
+   * y modal para solicitar cada servicio con integración a WhatsApp.
+   * Remplaza el contenido existente de la sección #servicios.
+   */
+  (function initServicesSection() {
+    const serviciosSection = document.getElementById('servicios');
+    if (!serviciosSection) return;
+    // Limpia el contenido existente
+    serviciosSection.innerHTML = '';
+    // Añade título
+    const title = document.createElement('h2');
+    title.className = 'servicios-title';
+    title.textContent = 'Servicios que ofrece';
+    serviciosSection.appendChild(title);
+    // Datos de los servicios
+    const services = [
+      {
+        title: 'Asesoría completa de tesis',
+        description: 'Desde el planteamiento del problema hasta la defensa final. Guía paso a paso con metodología propia.',
+        icon: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14"></path><path d="M4 15a2 2 0 0 1 2-2h10"></path></svg>'
+      },
+      {
+        title: 'Informes de prácticas',
+        description: 'Elaboración de informes de prácticas preprofesionales y suficiencia profesional con formato y rigor académico.',
+        icon: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-4"></path><rect x="9" y="2" width="6" height="4" rx="1"></rect></svg>'
+      },
+      {
+        title: 'Artículos y monografías',
+        description: 'Redacción y publicación de artículos científicos y monografías en revistas indexadas.',
+        icon: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h12l6 6v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>'
+      },
+      {
+        title: 'Corrección de estilo',
+        description: 'Revisión de redacción académica, citación, detección de similitud y ajuste a normas internacionales.',
+        icon: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5l4 4L7 21H3v-4l13.5-13.5z"></path></svg>'
+      },
+      {
+        title: 'Presentaciones para sustentación',
+        description: 'Diseño de diapositivas en PowerPoint o Canva para exponer y defender tu tesis con impacto visual.',
+        icon: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M12 17v4"></path><path d="M8 21h8"></path></svg>'
+      },
+      {
+        title: 'Entrenamiento y defensa',
+        description: 'Preparación para la exposición oral de tesis, con técnicas de oratoria y estrategias de defensa.',
+        icon: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M16.24 16.24l2.83 2.83"></path><path d="M2 12h4"></path><path d="M18 12h4"></path><path d="M4.93 19.07l2.83-2.83"></path><path d="M16.24 7.76l2.83-2.83"></path></svg>'
+      },
+      {
+        title: 'Tablas y gráficos estadísticos',
+        description: 'Análisis y visualización de datos en SPSS, Excel y Power BI para sustentar tus resultados.',
+        icon: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><rect x="7" y="10" width="3" height="7"></rect><rect x="12" y="6" width="3" height="11"></rect><rect x="17" y="13" width="3" height="4"></rect></svg>'
+      },
+      {
+        title: 'Servicio express',
+        description: 'Revisión y mejora de trabajos académicos en menos de 48 horas. Ideal para entregas urgentes.',
+        icon: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8L21 10h-9l1-8z"></path></svg>'
+      }
+    ];
+    // Crear grid contenedor
+    const grid = document.createElement('div');
+    grid.className = 'services-grid';
+    services.forEach(service => {
+      const card = document.createElement('div');
+      card.className = 'service-card';
+      card.dataset.service = service.title;
+      const iconDiv = document.createElement('div');
+      iconDiv.className = 'icon-container';
+      iconDiv.innerHTML = service.icon;
+      const h3 = document.createElement('h3');
+      h3.textContent = service.title;
+      const desc = document.createElement('p');
+      desc.textContent = service.description;
+      const btn = document.createElement('a');
+      btn.href = '#';
+      btn.className = 'btn-servicio';
+      btn.setAttribute('aria-label', 'Solicitar ' + service.title);
+      btn.textContent = 'Solicitar este servicio';
+      card.appendChild(iconDiv);
+      card.appendChild(h3);
+      card.appendChild(desc);
+      card.appendChild(btn);
+      grid.appendChild(card);
+    });
+    serviciosSection.appendChild(grid);
+    // Crear modal si no existe
+    let modal = document.getElementById('services-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'services-modal';
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <h3 id="services-modal-title">Solicitar servicio</h3>
+          <form id="services-form">
+            <input type="text" name="nombre" placeholder="Nombre completo" required />
+            <input type="email" name="correo" placeholder="Correo electrónico" required />
+            <textarea name="mensaje" placeholder="Describe brevemente tu necesidad" rows="3" required></textarea>
+            <button type="submit">Enviar</button>
+          </form>
+          <button type="button" class="close-modal">&times;</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+    // Función para cerrar modal
+    function closeModal() {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      const form = modal.querySelector('#services-form');
+      if (form) form.reset();
+    }
+    // Manejo de botones de servicio
+    const serviceButtons = serviciosSection.querySelectorAll('.btn-servicio');
+    serviceButtons.forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const card = this.closest('.service-card');
+        const serviceName = card ? card.dataset.service : '';
+        const modalTitleEl = modal.querySelector('#services-modal-title');
+        if (modalTitleEl) modalTitleEl.textContent = 'Solicitar ' + serviceName;
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden', 'false');
+        modal.dataset.service = serviceName;
+      });
+    });
+    // Botón cerrar modal
+    const closeBtn = modal.querySelector('.close-modal');
+    if (closeBtn && !closeBtn.dataset.listener) {
+      closeBtn.dataset.listener = 'true';
+      closeBtn.addEventListener('click', function () {
+        closeModal();
+      });
+    }
+    // Cerrar al hacer clic fuera del contenido
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    // Manejo del envío del formulario
+    const form = modal.querySelector('#services-form');
+    if (form && !form.dataset.listener) {
+      form.dataset.listener = 'true';
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const nombre = encodeURIComponent(form.nombre.value.trim());
+        const correo = encodeURIComponent(form.correo.value.trim());
+        const mensaje = encodeURIComponent(form.mensaje.value.trim());
+        const servicio = encodeURIComponent(modal.dataset.service || '');
+        const whatsappText = `Hola, soy ${nombre} (${correo}). Necesito ayuda con ${servicio}. ${mensaje}`;
+        window.open(`https://wa.me/51949236795?text=${whatsappText}`, '_blank');
+        closeModal();
+        alert('Gracias por tu interés. Te contactaremos pronto.');
+      });
+    }
+    // Estilos para la sección de servicios y el modal
+    const servStyle = document.createElement('style');
+    servStyle.textContent = `
+      /* Zona de tarjetas de servicios */
+      #servicios {
+        padding: 2rem 0;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      #servicios .servicios-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #FFFFFF;
+        font-family: 'Aptos', sans-serif;
+      }
+      #servicios .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+      #servicios .service-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-radius: 20px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        transition: transform 0.3s ease-in-out;
+        color: #1B2A4E;
+        font-family: 'Aptos', sans-serif;
+      }
+      #servicios .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+      #servicios .service-card .icon-container {
+        margin-bottom: 1rem;
+      }
+      #servicios .service-card h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1B2A4E;
+      }
+      #servicios .service-card p {
+        margin: 0 0 1rem;
+        font-size: 1rem;
+        color: #1B2A4E;
+      }
+      #servicios .service-card .btn-servicio {
+        background-color: #C9A13B;
+        color: #1B2A4E;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+      #servicios .service-card .btn-servicio:hover {
+        background-color: #b38b33;
+      }
+      /* Modal para servicios */
+      #services-modal.modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        padding: 1rem;
+      }
+      #services-modal .modal-content {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        max-width: 500px;
+        width: 100%;
+        color: #1B2A4E;
+        position: relative;
+      }
+      #services-modal .modal-content h3 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1B2A4E;
+      }
+      #services-modal .modal-content form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      #services-modal .modal-content input,
+      #services-modal .modal-content textarea {
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-size: 1rem;
+        width: 100%;
+        font-family: 'Aptos', sans-serif;
+      }
+      #services-modal .modal-content button[type="submit"] {
+        background-color: #C9A13B;
+        color: #1B2A4E;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      #services-modal .modal-content button[type="submit"]:hover {
+        background-color: #b38b33;
+      }
+      #services-modal .close-modal {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #1B2A4E;
+      }
+      @media (max-width: 768px) {
+        #servicios .services-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 480px) {
+        #servicios .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    `;
+    document.head.appendChild(servStyle);
+  })();
+
+  /**
+   * Inicializa la sección Sobre El Profesor G con diseño moderno y glassmorphism.
+   * Reemplaza el contenido de la sección #sobre para mostrar misión, visión,
+   * objetivos SMART y valores institucionales.
+   */
+  (function initAboutSection() {
+    const aboutSection = document.getElementById('sobre');
+    if (!aboutSection) return;
+    // Limpiar contenido existente
+    aboutSection.innerHTML = '';
+    aboutSection.className = 'sobre-section';
+    // Definir iconos para misión, visión, objetivos y valores
+    const missionIcon = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>';
+    const visionIcon = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+    const smartIcon = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.5-1.5 4.5-3.7 6l-.3.3c-.3.3-.5.7-.5 1.1V19h-6v-2.6c0-.4-.2-.8-.5-1.1l-.3-.3C6.5 13.5 5 11.5 5 9a7 7 0 0 1 7-7z"></path><line x1="9" y1="22" x2="15" y2="22"></line></svg>';
+    const valuesIcon = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8.5 22 9.3 17 14.1 18 21.3 12 17.9 6 21.3 7 14.1 2 9.3 9 8.5 12 2"></polygon></svg>';
+    // Construir contenido HTML
+    aboutSection.innerHTML = `
+      <div class="contenedor">
+        <h2>Sobre El Profesor G</h2>
+        <p>El Profesor G es un proyecto educativo especializado en el acompañamiento académico de estudiantes de pregrado y posgrado. Con base en principios metodológicos rigurosos, brindamos asesorías personalizadas, estrategias de redacción científica y entrenamiento profesional con enfoque humano, ético y eficiente.</p>
+        <div class="grid-mv">
+          <div class="bloque">
+            <div class="icon-container">${missionIcon}</div>
+            <h3>Misión</h3>
+            <p>Brindar asesorías académicas personalizadas, confiables y orientadas a resultados, a fin de que la elaboración de tesis y trabajos de investigación se convierta en un proceso formativo, ágil y exitoso.</p>
+          </div>
+          <div class="bloque">
+            <div class="icon-container">${visionIcon}</div>
+            <h3>Visión</h3>
+            <p>Ser reconocidos como el servicio de asesoría de tesis más confiable, accesible y eficiente de habla hispana, por nuestra excelencia académica, compromiso ético y transformación digital de la educación.</p>
+          </div>
+        </div>
+        <div class="bloque bloque-smart">
+          <div class="icon-container">${smartIcon}</div>
+          <h3>Objetivos SMART</h3>
+          <ul>
+            <li><strong>Específicos:</strong> Asesorar tesis de pregrado, titulación y posgrado con un enfoque por capítulos y normativa APA/Scopus.</li>
+            <li><strong>Medibles:</strong> Supervisar y entregar más de 50 proyectos mensuales con seguimiento por CRM educativo.</li>
+            <li><strong>Alcanzables:</strong> Adaptar cada asesoría al perfil del estudiante según universidad, modalidad y fecha de entrega.</li>
+            <li><strong>Relevantes:</strong> Contribuir a la mejora de la calidad investigativa en universidades del Perú y Latinoamérica.</li>
+            <li><strong>Temporales:</strong> Culminar cada asesoría entre 2 a 8 semanas, según nivel de avance y tipo de tesis.</li>
+          </ul>
+        </div>
+        <div class="bloque bloque-valores">
+          <div class="icon-container">${valuesIcon}</div>
+          <h3>Valores institucionales</h3>
+          <ul class="valores-lista">
+            <li><strong>Compromiso:</strong> Nos involucramos con cada estudiante hasta alcanzar su meta académica.</li>
+            <li><strong>Ética:</strong> Promovemos la originalidad, el respeto por los derechos de autor y el uso legítimo de fuentes.</li>
+            <li><strong>Excelencia:</strong> Aplicamos las mejores prácticas académicas, tecnológicas y pedagógicas.</li>
+            <li><strong>Puntualidad:</strong> Cumplimos estrictamente los cronogramas de entrega acordados.</li>
+          </ul>
+        </div>
+      </div>
+    `;
+    // Estilos para la sección Sobre El Profesor G
+    const aboutStyle = document.createElement('style');
+    aboutStyle.textContent = `
+      .sobre-section {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        max-width: 1100px;
+        margin: 2rem auto;
+        color: #1B2A4E;
+        font-family: 'Aptos', sans-serif;
+      }
+      .sobre-section h2 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+      .sobre-section p {
+        font-size: 16px;
+        margin-bottom: 1.5rem;
+      }
+      .sobre-section .grid-mv {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+      .sobre-section .bloque {
+        flex: 1 1 45%;
+        min-width: 280px;
+      }
+      .sobre-section .icon-container {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0.5rem;
+      }
+      .sobre-section h3 {
+        font-size: 20px;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #1B2A4E;
+      }
+      .sobre-section .bloque p {
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+        color: #1B2A4E;
+      }
+      .sobre-section .bloque-smart ul,
+      .sobre-section .bloque-valores ul {
+        margin-top: 0.5rem;
+        padding-left: 1.5rem;
+      }
+      .sobre-section .valores-lista li {
+        margin-bottom: 0.5rem;
+        list-style: none;
+      }
+      .sobre-section .valores-lista li::before {
+        content: '✔️ ';
+        margin-right: 0.3rem;
+        color: #C9A13B;
+      }
+      .sobre-section ul {
+        color: #1B2A4E;
+        font-size: 0.95rem;
+      }
+      @media (max-width: 768px) {
+        .sobre-section .grid-mv {
+          flex-direction: column;
+        }
+        .sobre-section .bloque {
+          flex: 1 1 100%;
+        }
+      }
+    `;
+    document.head.appendChild(aboutStyle);
+  })();
+
 });
