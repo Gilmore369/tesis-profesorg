@@ -394,4 +394,343 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   })();
+
+  /**
+   * Inicializa la sección de precios con tarjetas de estilo glassmorphism.
+   * Crea un modal con una encuesta de 10 preguntas que se debe completar
+   * para desbloquear la visualización de precios. Usa localStorage para recordar
+   * si ya se completó el formulario y genera enlaces dinámicos de WhatsApp.
+   */
+  (function initPricingSection() {
+    const preciosSection = document.getElementById('precios');
+    if (!preciosSection) return;
+    // Limpia el contenido existente para reemplazarlo por las nuevas tarjetas
+    preciosSection.innerHTML = '';
+
+    // Datos de servicios con sus precios y descripciones
+    const services = [
+      {
+        id: 'industrial',
+        title: 'Ingeniería Industrial',
+        description: 'Tesis de titulación, Tesis de pregrado (Tesis 1 y Tesis 2), Proyecto de investigación e Informe de prácticas preprofesionales.',
+        prices: [
+          { label: 'Tesis de titulación', value: 'S/ 3,500' },
+          { label: 'Tesis de pregrado IIND (Tesis 1)', value: 'S/ 1,250' },
+          { label: 'Tesis de pregrado IIND (Tesis 2)', value: 'S/ 1,750' },
+          { label: 'Proyecto de investigación IIND', value: 'S/ 1,000' },
+          { label: 'Informe de prácticas preprofesionales IIND', value: 'S/ 1,250' },
+        ],
+        icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>`
+      },
+      {
+        id: 'administracion',
+        title: 'Administración',
+        description: 'Tesis de titulación, Tesis de pregrado (Tesis 1 y Tesis 2) y Proyectos de investigación para carreras administrativas.',
+        prices: [
+          { label: 'Tesis de titulación', value: 'S/ 3,000' },
+          { label: 'Tesis de pregrado ADM (Tesis 1)', value: 'S/ 1,000' },
+          { label: 'Tesis de pregrado ADM (Tesis 2)', value: 'S/ 1,250' },
+          { label: 'Proyecto de investigación ADM', value: 'S/ 750' },
+        ],
+        icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M2 11h20"></path></svg>`
+      },
+      {
+        id: 'extras',
+        title: 'Servicios adicionales',
+        description: 'Diagnóstico de tesis, definición de tema, proyectos de cursos y más. Ajusta el precio según tus necesidades.',
+        prices: [
+          { label: 'Diagnóstico de tesis (40 min)', value: 'S/ 80' },
+          { label: 'Definición de tema (40 min)', value: 'S/ 80' },
+          { label: 'Proyectos de cursos importantes', value: 'S/ 500 – 750' },
+        ],
+        icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A13B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-8"></path><path d="M8 12l4-4 4 4"></path><rect x="3" y="4" width="18" height="4" rx="2"></rect></svg>`
+      }
+    ];
+
+    // Contenedor de tarjetas
+    const grid = document.createElement('div');
+    grid.className = 'pricing-grid';
+    services.forEach(service => {
+      const card = document.createElement('div');
+      card.className = 'price-card';
+      card.dataset.service = service.title;
+      // Construye las líneas de precios ocultas
+      const priceLines = service.prices.map(p => `<p>${p.label}: <strong>${p.value}</strong></p>`).join('');
+      card.innerHTML = `
+        <div class="icon-container">${service.icon}</div>
+        <h3>${service.title}</h3>
+        <p class="service-desc">${service.description}</p>
+        <div class="price-details" style="display: none;">
+          ${priceLines}
+        </div>
+        <a href="#" class="unlock-btn">Desbloquear precio</a>
+      `;
+      grid.appendChild(card);
+    });
+    preciosSection.appendChild(grid);
+
+    // Crea el modal y lo adjunta al cuerpo si aún no existe
+    let modalOverlay = document.getElementById('precios-modal');
+    if (!modalOverlay) {
+      modalOverlay = document.createElement('div');
+      modalOverlay.id = 'precios-modal';
+      modalOverlay.className = 'modal-overlay';
+      modalOverlay.innerHTML = `
+        <div class="modal-content">
+          <h3>Cuéntanos sobre tu proyecto</h3>
+          <form id="precios-form">
+            <input type="text" name="nombre" placeholder="Nombre completo" required />
+            <input type="email" name="correo" placeholder="Correo electrónico" required />
+            <input type="text" name="carrera" placeholder="Carrera profesional" required />
+            <input type="text" name="universidad" placeholder="Universidad" required />
+            <select name="tipo" required>
+              <option value="" disabled selected>Tipo de tesis o proyecto</option>
+              <option value="Pregrado Tesis 1">Pregrado Tesis 1</option>
+              <option value="Pregrado Tesis 2">Pregrado Tesis 2</option>
+              <option value="Titulación">Titulación</option>
+              <option value="Proyecto">Proyecto</option>
+            </select>
+            <select name="tema" required>
+              <option value="" disabled selected>¿Ya tienes un tema definido?</option>
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+            <select name="modalidad" required>
+              <option value="" disabled selected>Modalidad</option>
+              <option value="Individual">Individual</option>
+              <option value="Grupo">Grupo</option>
+            </select>
+            <select name="avance" required>
+              <option value="" disabled selected>Nivel de avance</option>
+              <option value="0%">0%</option>
+              <option value="25%">25%</option>
+              <option value="50%">50%</option>
+              <option value="75%">75%</option>
+              <option value="100%">100%</option>
+            </select>
+            <select name="tiempo" required>
+              <option value="" disabled selected>Tiempo estimado para entregar</option>
+              <option value="Menos de 1 mes">Menos de 1 mes</option>
+              <option value="1–3 meses">Entre 1–3 meses</option>
+              <option value="Más de 3 meses">Más de 3 meses</option>
+            </select>
+            <select name="asesoria" required>
+              <option value="" disabled selected>¿Deseas recibir asesoría gratuita?</option>
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+            <button type="submit" class="submit-form">Enviar</button>
+          </form>
+          <button type="button" class="close-modal">&times;</button>
+        </div>
+      `;
+      document.body.appendChild(modalOverlay);
+    }
+
+    // Función para mostrar el modal
+    function openModal() {
+      modalOverlay.style.display = 'flex';
+    }
+    // Función para cerrar el modal
+    function closeModal() {
+      modalOverlay.style.display = 'none';
+    }
+
+    // Cerrar modal al hacer clic en el botón de cerrar
+    modalOverlay.querySelector('.close-modal').addEventListener('click', function () {
+      closeModal();
+    });
+    // Cerrar modal si se hace clic fuera del contenido
+    modalOverlay.addEventListener('click', function (e) {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    // Manejo del envío del formulario
+    const form = modalOverlay.querySelector('#precios-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Obtener datos del formulario
+      const formData = new FormData(form);
+      const nombre = formData.get('nombre') || '';
+      const carrera = formData.get('carrera') || '';
+      const tipo = formData.get('tipo') || '';
+      // Guardar en localStorage que ya se desbloquearon los precios
+      localStorage.setItem('preciosDesbloqueados', 'true');
+      // También guardamos algunos datos para generar el enlace de WhatsApp más tarde
+      localStorage.setItem('lastNombre', nombre);
+      localStorage.setItem('lastCarrera', carrera);
+      localStorage.setItem('lastTipo', tipo);
+      // Cerrar modal
+      closeModal();
+      // Actualizar tarjetas y botones
+      updatePriceCards();
+    });
+
+    // Define la lógica para actualizar el estado de las tarjetas según localStorage
+    function updatePriceCards() {
+      const unlocked = localStorage.getItem('preciosDesbloqueados') === 'true';
+      const cards = preciosSection.querySelectorAll('.price-card');
+      cards.forEach(card => {
+        const priceDetails = card.querySelector('.price-details');
+        const button = card.querySelector('.unlock-btn');
+        if (unlocked) {
+          // Mostrar precios
+          priceDetails.style.display = '';
+          // Cambiar texto y funcionalidad del botón
+          button.textContent = 'Cotiza ahora por WhatsApp';
+          // Definir enlace dinámico al hacer clic
+          button.addEventListener('click', function (e) {
+            e.preventDefault();
+            const nombre = encodeURIComponent(localStorage.getItem('lastNombre') || '');
+            const carrera = encodeURIComponent(localStorage.getItem('lastCarrera') || card.dataset.service);
+            const tipo = encodeURIComponent(localStorage.getItem('lastTipo') || '');
+            const message = `Hola,%20quiero%20cotizar%20una%20tesis%20de%20${carrera}%20(${tipo})`;
+            window.open(`https://wa.me/51949236795?text=${message}`, '_blank');
+          }, { once: true });
+        } else {
+          // Ocultar precios y restaurar botón para abrir la encuesta
+          priceDetails.style.display = 'none';
+          button.textContent = 'Desbloquear precio';
+          button.addEventListener('click', function (e) {
+            e.preventDefault();
+            openModal();
+          }, { once: true });
+        }
+      });
+    }
+
+    // Al cargar la página, actualiza las tarjetas según el estado almacenado
+    updatePriceCards();
+
+    // Estilos específicos para la sección de precios y el modal
+    const pricingStyle = document.createElement('style');
+    pricingStyle.textContent = `
+      /* Zona de tarjetas de precios */
+      #precios {
+        padding: 2rem 0;
+      }
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      .price-card {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 24px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        color: #1B2A4E;
+        font-family: 'Aptos', sans-serif;
+      }
+      .price-card .icon-container {
+        margin-bottom: 1rem;
+      }
+      .price-card h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        color: #1B2A4E;
+      }
+      .price-card .service-desc {
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+        color: #1B2A4E;
+      }
+      .price-card .price-details p {
+        margin: 0.25rem 0;
+        font-size: 0.9rem;
+        color: #1B2A4E;
+      }
+      .price-card .unlock-btn {
+        display: inline-block;
+        margin-top: 1rem;
+        background-color: #C9A13B;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .price-card .unlock-btn:hover {
+        background-color: #b38b33;
+      }
+      /* Modal y lógica del formulario */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+      }
+      .modal-content {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 16px;
+        padding: 2rem;
+        max-width: 600px;
+        width: 100%;
+        position: relative;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      }
+      .modal-content h3 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: #1B2A4E;
+      }
+      .modal-content form input,
+      .modal-content form select {
+        width: 100%;
+        margin-bottom: 0.75rem;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
+      .modal-content .submit-form {
+        width: 100%;
+        background-color: #C9A13B;
+        color: #fff;
+        padding: 0.6rem 1rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .modal-content .submit-form:hover {
+        background-color: #b38b33;
+      }
+      .modal-content .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #1B2A4E;
+        cursor: pointer;
+      }
+      /* Responsive ajustes para tarjetas en pantallas pequeñas */
+      @media (max-width: 600px) {
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+        .price-card {
+          padding: 1.5rem;
+        }
+      }
+    `;
+    document.head.appendChild(pricingStyle);
+  })();
 });
