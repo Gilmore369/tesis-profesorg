@@ -1193,40 +1193,24 @@ document.addEventListener('DOMContentLoaded', function () {
     aboutSection.innerHTML = `
       <div class="contenedor">
         <h2>Sobre El Profesor G</h2>
-        <p>El Profesor G es un proyecto educativo especializado en el acompañamiento académico de estudiantes de pregrado y posgrado. Con base en principios metodológicos rigurosos, brindamos asesorías personalizadas, estrategias de redacción científica y entrenamiento profesional con enfoque humano, ético y eficiente.</p>
-        <div class="grid-mv">
-          <div class="bloque">
-            <div class="icon-container">${missionIcon}</div>
-            <h3>Misión</h3>
-            <p>Brindar asesorías académicas personalizadas, confiables y orientadas a resultados, a fin de que la elaboración de tesis y trabajos de investigación se convierta en un proceso formativo, ágil y exitoso.</p>
-          </div>
-          <div class="bloque">
-            <div class="icon-container">${visionIcon}</div>
-            <h3>Visión</h3>
-            <p>Ser reconocidos como el servicio de asesoría de tesis más confiable, accesible y eficiente de habla hispana, por nuestra excelencia académica, compromiso ético y transformación digital de la educación.</p>
-          </div>
-        </div>
-        <div class="bloque bloque-smart">
-          <div class="icon-container">${smartIcon}</div>
-          <h3>Objetivos SMART</h3>
-          <ul>
-            <li><strong>Específicos:</strong> Asesorar tesis de pregrado, titulación y posgrado con un enfoque por capítulos y normativa APA/Scopus.</li>
-            <li><strong>Medibles:</strong> Supervisar y entregar más de 50 proyectos mensuales con seguimiento por CRM educativo.</li>
-            <li><strong>Alcanzables:</strong> Adaptar cada asesoría al perfil del estudiante según universidad, modalidad y fecha de entrega.</li>
-            <li><strong>Relevantes:</strong> Contribuir a la mejora de la calidad investigativa en universidades del Perú y Latinoamérica.</li>
-            <li><strong>Temporales:</strong> Culminar cada asesoría entre 2 a 8 semanas, según nivel de avance y tipo de tesis.</li>
-          </ul>
-        </div>
-        <div class="bloque bloque-valores">
-          <div class="icon-container">${valuesIcon}</div>
-          <h3>Valores institucionales</h3>
-          <ul class="valores-lista">
-            <li><strong>Compromiso:</strong> Nos involucramos con cada estudiante hasta alcanzar su meta académica.</li>
-            <li><strong>Ética:</strong> Promovemos la originalidad, el respeto por los derechos de autor y el uso legítimo de fuentes.</li>
-            <li><strong>Excelencia:</strong> Aplicamos las mejores prácticas académicas, tecnológicas y pedagógicas.</li>
-            <li><strong>Puntualidad:</strong> Cumplimos estrictamente los cronogramas de entrega acordados.</li>
-          </ul>
-        </div>
+        <p>El Profesor G nació como un proyecto educativo en 2018, cuando su fundador —ingeniero industrial y apasionado por la investigación— comenzó a impartir asesorías informales a compañeros de la Universidad Privada Antenor Orrego (UPAO) en Trujillo. En aquella época, muchos estudiantes afrontaban solos la elaboración de sus primeras tesis y proyectos académicos, sin saber cómo estructurar un marco teórico, diseñar una metodología rigurosa o redactar de forma adecuada. Gianfranco, conocido entre sus colegas como “el Profe G”, entendió que podía aportar su experiencia y su formación técnica para guiar a otros.</p>
+        <p>Las primeras asesorías se centraron en tesis de pregrado de Ingeniería Industrial y Administración, revisando capítulos, corrigiendo bibliografías y preparando presentaciones de sustentación. Con el tiempo, la demanda creció: estudiantes de otras facultades y universidades comenzaron a solicitar su ayuda, lo que lo llevó a formalizar el proyecto y a consolidar un equipo multidisciplinar de colaboradores. A partir de 2020, “El Profesor G” amplió sus servicios para abarcar informes de prácticas, artículos científicos, monografías y proyectos de titulación, siempre con un enfoque personalizado y ético.</p>
+        <p>Hoy, la marca “El Profesor G” es sinónimo de confianza y excelencia académica. El equipo utiliza herramientas modernas de gestión y análisis y mantiene un acompañamiento cercano con cada estudiante, desde la definición del tema hasta la defensa final. El compromiso principal es que ningún estudiante se quede sin apoyo: el equipo se organiza para cubrir toda la demanda mensual, adaptándose a los tiempos de cada universidad y asegurando la entrega puntual de cada proyecto.</p>
+        <h3>Objetivos</h3>
+        <ul class="objetivos">
+          <li><strong>Asesoría integral:</strong> Acompañar a estudiantes de pregrado, titulación y posgrado en la elaboración de sus tesis y proyectos, ofreciendo orientación por capítulos, corrección de estilo y apoyo metodológico conforme a normativas APA, Vancouver o Scopus.</li>
+          <li><strong>Cobertura de la demanda:</strong> Organizar el trabajo del equipo para atender todos los proyectos solicitados cada mes, sin importar el área académica o la complejidad del tema.</li>
+          <li><strong>Personalización:</strong> Ajustar cada asesoría al perfil del estudiante (universidad, carrera, modalidad individual o en grupo) y al avance de su investigación, con reuniones periódicas y seguimiento continuo.</li>
+          <li><strong>Calidad y ética:</strong> Promover la originalidad, el respeto por los derechos de autor y el uso responsable de fuentes; utilizar software de detección de similitud para garantizar la autenticidad de los trabajos.</li>
+          <li><strong>Innovación y mejora continua:</strong> Incorporar nuevas metodologías y herramientas tecnológicas que optimicen la investigación académica y la comunicación con los estudiantes.</li>
+        </ul>
+        <h3>Valores institucionales</h3>
+        <ul class="valores-lista">
+          <li><strong>Compromiso:</strong> Nos involucramos con cada estudiante hasta alcanzar su meta académica.</li>
+          <li><strong>Ética:</strong> Promovemos la originalidad, el respeto por los derechos de autor y el uso legítimo de fuentes.</li>
+          <li><strong>Excelencia:</strong> Aplicamos las mejores prácticas académicas, tecnológicas y pedagógicas.</li>
+          <li><strong>Puntualidad:</strong> Cumplimos estrictamente los cronogramas de entrega acordados.</li>
+        </ul>
       </div>
     `;
     // Estilos para la sección Sobre El Profesor G
