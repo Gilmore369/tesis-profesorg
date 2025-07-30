@@ -289,6 +289,23 @@ document.addEventListener('DOMContentLoaded', function () {
     .hero-register button:hover {
       background-color: #b38b33;
     }
+
+        /* Distribución del héroe: coloca la descripción y el formulario uno al lado del otro en pantallas anchas */
+        header.hero {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+        header.hero .content {
+          flex: 1 1 40%;
+          min-width: 280px;
+          margin-right: 20px;
+        }
+        header.hero .hero-register {
+          flex: 1 1 40%;
+          max-width: 450px;
+        }
   `;
   document.head.appendChild(style);
 
@@ -323,9 +340,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Insertar formulario de diagnóstico/asesoría en el héroe
   (function insertDiagnosisForm() {
-    const hero = document.querySelector('header.hero .container');
+    // Selecciona el contenedor del héroe completo
+    const hero = document.querySelector('header.hero');
     if (!hero) return;
-    // Elimina la imagen del héroe si existe
+    // Eliminar la imagen del héroe para dar espacio al formulario
     const heroImage = hero.querySelector('.image');
     if (heroImage) {
       heroImage.remove();
@@ -345,6 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <button type="submit">Enviar solicitud</button>
       </form>
     `;
+    // Insertar el formulario en el héroe después del contenido existente
     hero.appendChild(formDiv);
     const diagForm = document.getElementById('diagnostico-form');
     if (diagForm) {
