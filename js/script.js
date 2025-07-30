@@ -237,6 +237,58 @@ document.addEventListener('DOMContentLoaded', function () {
     nav ul.menu-hidden li {
       margin: 8px 0;
     }
+    /* Oculta el icono de menú hamburguesa en la vista de escritorio */
+    .menu-toggle {
+      display: none !important;
+    }
+    /* Navegación horizontal */
+    nav ul {
+      display: flex !important;
+      gap: 20px;
+    }
+    nav ul li {
+      margin: 0;
+    }
+    /* Formulario de registro en la portada */
+    .hero-register {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      margin-top: 20px;
+    }
+    .hero-register h3 {
+      margin-bottom: 12px;
+      color: #1B2A4E;
+      font-weight: bold;
+    }
+    .hero-register input,
+    .hero-register textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: 'Aptos', sans-serif;
+    }
+    .hero-register textarea {
+      resize: vertical;
+    }
+    .hero-register button {
+      width: 100%;
+      background-color: #C9A13B;
+      color: #ffffff;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .hero-register button:hover {
+      background-color: #b38b33;
+    }
   `;
   document.head.appendChild(style);
 
@@ -253,22 +305,63 @@ document.addEventListener('DOMContentLoaded', function () {
   `;
   document.body.appendChild(widget);
 
-  // Menú hamburguesa: creación y comportamiento
-  const navBar = document.querySelector('nav');
-  if (navBar) {
+  // Ajuste de navegación: eliminar menú vertical y mostrar navegación horizontal
+  (function fixNavigation() {
+    const navBar = document.querySelector('nav');
+    if (!navBar) return;
     const navListEl = navBar.querySelector('ul');
-    const menuToggle = document.createElement('div');
-    menuToggle.className = 'menu-toggle';
-    menuToggle.innerHTML = '<span></span><span></span><span></span>';
-    navBar.appendChild(menuToggle);
+    // Eliminar clases que ocultan la navegación
     if (navListEl) {
-      navListEl.classList.add('menu-hidden');
-      menuToggle.addEventListener('mouseenter', () => {
-        navListEl.classList.add('show-menu');
-      });
-      navBar.addEventListener('mouseleave', () => {
-        navListEl.classList.remove('show-menu');
+      navListEl.classList.remove('menu-hidden', 'show-menu');
+    }
+    // Ocultar el icono de menú hamburguesa si existe
+    const toggleEl = navBar.querySelector('.menu-toggle');
+    if (toggleEl) {
+      toggleEl.style.display = 'none';
+    }
+  })();
+
+  // Insertar formulario de diagnóstico/asesoría en el héroe
+  (function insertDiagnosisForm() {
+    const hero = document.querySelector('header.hero .container');
+    if (!hero) return;
+    // Elimina la imagen del héroe si existe
+    const heroImage = hero.querySelector('.image');
+    if (heroImage) {
+      heroImage.remove();
+    }
+    // Crear contenedor del formulario
+    const formDiv = document.createElement('div');
+    formDiv.className = 'hero-register';
+    formDiv.innerHTML = `
+      <h3>Solicita tu diagnóstico o asesoría gratuita</h3>
+      <form id="diagnostico-form">
+        <input type="text" name="nombre" placeholder="Nombre completo" required />
+        <input type="email" name="email" placeholder="Correo electrónico" required />
+        <input type="tel" name="telefono" placeholder="Teléfono" required />
+        <input type="text" name="universidad" placeholder="Universidad" required />
+        <input type="text" name="carrera" placeholder="Carrera" required />
+        <textarea name="comentarios" placeholder="Comentarios (opcional)" rows="3"></textarea>
+        <button type="submit">Enviar solicitud</button>
+      </form>
+    `;
+    hero.appendChild(formDiv);
+    const diagForm = document.getElementById('diagnostico-form');
+    if (diagForm) {
+      diagForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const nombre = encodeURIComponent(this.nombre.value);
+        const email = encodeURIComponent(this.email.value);
+        const telefono = encodeURIComponent(this.telefono.value);
+        const universidad = encodeURIComponent(this.universidad.value);
+        const carrera = encodeURIComponent(this.carrera.value);
+        const comentarios = encodeURIComponent(this.comentarios.value || '');
+        const message =
+          `Hola, soy ${nombre}, estudiante de ${carrera} en ${universidad}. ` +
+          `Mi número es ${telefono} (${email}). Solicito mi diagnóstico/asesoría gratuita.` +
+          (comentarios ? ` Comentarios: ${comentarios}` : '');
+        window.open(`https://wa.me/51949236795?text=${message}`, '_blank');
       });
     }
-  }
+  })();
 });
