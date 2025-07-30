@@ -200,6 +200,43 @@ document.addEventListener('DOMContentLoaded', function () {
       text-decoration: none;
       font-weight: bold;
     }
+    /* Estilos para menú hamburguesa */
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 30px;
+      height: 24px;
+      cursor: pointer;
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: #C9A13B;
+      border-radius: 2px;
+    }
+    nav ul.menu-hidden {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: #1B2A4E;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    nav ul.menu-hidden.show-menu {
+      display: flex;
+    }
+    nav ul.menu-hidden li {
+      margin: 8px 0;
+    }
   `;
   document.head.appendChild(style);
 
@@ -215,4 +252,23 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   `;
   document.body.appendChild(widget);
+
+  // Menú hamburguesa: creación y comportamiento
+  const navBar = document.querySelector('nav');
+  if (navBar) {
+    const navListEl = navBar.querySelector('ul');
+    const menuToggle = document.createElement('div');
+    menuToggle.className = 'menu-toggle';
+    menuToggle.innerHTML = '<span></span><span></span><span></span>';
+    navBar.appendChild(menuToggle);
+    if (navListEl) {
+      navListEl.classList.add('menu-hidden');
+      menuToggle.addEventListener('mouseenter', () => {
+        navListEl.classList.add('show-menu');
+      });
+      navBar.addEventListener('mouseleave', () => {
+        navListEl.classList.remove('show-menu');
+      });
+    }
+  }
 });
