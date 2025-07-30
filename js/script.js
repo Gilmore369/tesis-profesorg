@@ -336,6 +336,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (toggleEl) {
       toggleEl.style.display = 'none';
     }
+
+    // Eliminar enlaces duplicados de contacto (conserva solo el primero)
+    if (navListEl) {
+      const contactLinks = navListEl.querySelectorAll('a[href="#contacto"]');
+      if (contactLinks.length > 1) {
+        for (let i = 1; i < contactLinks.length; i++) {
+          const li = contactLinks[i].closest('li');
+          if (li) li.remove();
+        }
+      }
+    }
   })();
 
   // Insertar formulario de diagnóstico/asesoría en el héroe
@@ -352,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const formDiv = document.createElement('div');
     formDiv.className = 'hero-register';
     formDiv.innerHTML = `
-      <h3>Solicita tu diagnóstico o asesoría gratuita</h3>
+      <h3>Solicita diagnóstico/asesoría y tu eBook gratuito</h3>
       <form id="diagnostico-form">
         <input type="text" name="nombre" placeholder="Nombre completo" required />
         <input type="email" name="email" placeholder="Correo electrónico" required />
@@ -377,7 +388,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const comentarios = encodeURIComponent(this.comentarios.value || '');
         const message =
           `Hola, soy ${nombre}, estudiante de ${carrera} en ${universidad}. ` +
-          `Mi número es ${telefono} (${email}). Solicito mi diagnóstico/asesoría gratuita.` +
+          `Mi número es ${telefono} (${email}). Deseo solicitar mi diagnóstico/asesoría gratuita y el eBook \"Cómo redactar tu tesis\".` +
           (comentarios ? ` Comentarios: ${comentarios}` : '');
         window.open(`https://wa.me/51949236795?text=${message}`, '_blank');
       });
