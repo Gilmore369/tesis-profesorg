@@ -404,7 +404,138 @@ document.addEventListener('DOMContentLoaded', function () {
   (function initPricingSection() {
     const preciosSection = document.getElementById('precios');
     if (!preciosSection) return;
-    // Limpia el contenido existente para reemplazarlo por las nuevas tarjetas
+    // Si la sección ya contiene tarjetas con la clase .price-card (es decir, se definieron en el HTML),
+    // no generamos nuevas tarjetas sino que configuramos la lógica de desbloqueo y el modal.
+    if (preciosSection.querySelector('.price-card')) {
+      // Asegurar que el modal exista; si no, crearlo de forma similar al estático
+      let modalOverlay = document.getElementById('precios-modal');
+      if (!modalOverlay) {
+        modalOverlay = document.createElement('div');
+        modalOverlay.id = 'precios-modal';
+        modalOverlay.className = 'modal-overlay';
+        modalOverlay.innerHTML = `
+          <div class="modal-content">
+            <h3>Cuéntanos sobre tu proyecto</h3>
+            <form id="precios-form">
+              <input type="text" name="nombre" placeholder="Nombre completo" required />
+              <input type="email" name="correo" placeholder="Correo electrónico" required />
+              <input type="text" name="carrera" placeholder="Carrera profesional" required />
+              <input type="text" name="universidad" placeholder="Universidad" required />
+              <select name="tipo" required>
+                <option value="" disabled selected>Tipo de tesis o proyecto</option>
+                <option value="Pregrado Tesis 1">Pregrado Tesis 1</option>
+                <option value="Pregrado Tesis 2">Pregrado Tesis 2</option>
+                <option value="Titulación">Titulación</option>
+                <option value="Proyecto">Proyecto</option>
+              </select>
+              <select name="tema" required>
+                <option value="" disabled selected>¿Ya tienes un tema definido?</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+              </select>
+              <select name="modalidad" required>
+                <option value="" disabled selected>Modalidad</option>
+                <option value="Individual">Individual</option>
+                <option value="Grupo">Grupo</option>
+              </select>
+              <select name="avance" required>
+                <option value="" disabled selected>Nivel de avance</option>
+                <option value="0%">0%</option>
+                <option value="25%">25%</option>
+                <option value="50%">50%</option>
+                <option value="75%">75%</option>
+                <option value="100%">100%</option>
+              </select>
+              <select name="tiempo" required>
+                <option value="" disabled selected>Tiempo estimado para entregar</option>
+                <option value="Menos de 1 mes">Menos de 1 mes</option>
+                <option value="1–3 meses">Entre 1–3 meses</option>
+                <option value="Más de 3 meses">Más de 3 meses</option>
+              </select>
+              <select name="asesoria" required>
+                <option value="" disabled selected>¿Deseas recibir asesoría gratuita?</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+              </select>
+              <button type="submit" class="submit-form">Enviar</button>
+            </form>
+            <button type="button" class="close-modal">&times;</button>
+          </div>
+        `;
+        document.body.appendChild(modalOverlay);
+      }
+      // Funciones para abrir y cerrar el modal
+      function openModal() {
+        modalOverlay.style.display = 'flex';
+      }
+      function closeModal() {
+        modalOverlay.style.display = 'none';
+      }
+      // Cerrar modal al hacer clic en el botón de cerrar
+      const closeBtn = modalOverlay.querySelector('.close-modal');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+          closeModal();
+        });
+      }
+      // Cerrar modal si se hace clic en el fondo
+      modalOverlay.addEventListener('click', function (e) {
+        if (e.target === modalOverlay) {
+          closeModal();
+        }
+      });
+      const form = modalOverlay.querySelector('#precios-form');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const nombre = formData.get('nombre') || '';
+          const carrera = formData.get('carrera') || '';
+          const tipo = formData.get('tipo') || '';
+          // Guardar estado en localStorage
+          localStorage.setItem('preciosDesbloqueados', 'true');
+          localStorage.setItem('lastNombre', nombre);
+          localStorage.setItem('lastCarrera', carrera);
+          localStorage.setItem('lastTipo', tipo);
+          closeModal();
+          updatePriceCards();
+        });
+      }
+      // Logica para actualizar tarjetas segun estado
+      function updatePriceCards() {
+        const unlocked = localStorage.getItem('preciosDesbloqueados') === 'true';
+        const cards = preciosSection.querySelectorAll('.price-card');
+        cards.forEach(card => {
+          const priceDetails = card.querySelector('.price-details');
+          const button = card.querySelector('.unlock-btn');
+          if (unlocked) {
+            priceDetails.style.display = '';
+            button.textContent = 'Cotiza ahora por WhatsApp';
+            button.addEventListener('click', function (e) {
+              e.preventDefault();
+              const nombre = encodeURIComponent(localStorage.getItem('lastNombre') || '');
+              const carrera = encodeURIComponent(localStorage.getItem('lastCarrera') || card.dataset.service);
+              const tipo = encodeURIComponent(localStorage.getItem('lastTipo') || '');
+              const message = `Hola,%20quiero%20cotizar%20una%20tesis%20de%20${carrera}%20(${tipo})`;
+              window.open(`https://wa.me/51949236795?text=${message}`, '_blank');
+            }, { once: true });
+          } else {
+            priceDetails.style.display = 'none';
+            button.textContent = 'Desbloquear precio';
+            button.addEventListener('click', function (e) {
+              e.preventDefault();
+              openModal();
+            }, { once: true });
+          }
+        });
+      }
+      // Inicializar tarjetas al cargar
+      updatePriceCards();
+      // Ya manejamos tarjetas existentes, no continuar con generación dinámica
+      return;
+    }
+    // Para versiones antiguas o páginas sin tarjetas predefinidas, se limpia el contenido existente para reemplazarlo por las nuevas tarjetas
+    // Limpia el contenido existente
     preciosSection.innerHTML = '';
 
     // Datos de servicios con sus precios y descripciones
