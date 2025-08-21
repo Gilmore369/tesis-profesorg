@@ -1,420 +1,1202 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO meta tags -->
-    <meta name="description" content="Servicios de asesoría de tesis y trabajos académicos en Perú. El Profesor G brinda asesorías personalizadas, redacción de tesis, informes académicos, corrección de estilo, preparación para sustentaciones y más.">
-    <meta name="keywords" content="asesoría de tesis, asesoría académica, servicio de tesis profesional, asesoría de tesis en Perú, asesoría académica Trujillo, informes académicos, corrección de estilo, presentación de tesis">
-    <title>El Profesor G – Tu tesis, nuestra misión académica</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>El Profesor G – Tu tesis, nuestra misión académica</title>
+    <meta
+      name="description"
+      content="Servicios de asesoría de tesis y trabajos académicos en Perú. El Profesor G brinda asesorías personalizadas, redacción de tesis, informes académicos, corrección de estilo, preparación para sustentaciones y más."
+    />
+    <meta
+      name="keywords"
+      content="asesoría de tesis, asesoría académica, servicio de tesis profesional, asesoría de tesis en Perú, asesoría académica Trujillo, informes académicos, corrección de estilo, presentación de tesis"
+    />
+    <meta name="author" content="El Profesor G" />
+    <link rel="canonical" href="https://profesorg.com" />
+
+    <!-- Open Graph Tags -->
+    <meta
+      property="og:title"
+      content="El Profesor G – Tu tesis, nuestra misión académica"
+    />
+    <meta
+      property="og:description"
+      content="Servicios de asesoría de tesis y trabajos académicos en Perú. Asesorías personalizadas, redacción de tesis, informes académicos y más."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://profesorg.com" />
+    <meta
+      property="og:image"
+      content="https://profesorg.com/images/og-image.jpg"
+    />
+    <meta property="og:locale" content="es_PE" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="El Profesor G – Tu tesis, nuestra misión académica"
+    />
+    <meta
+      name="twitter:description"
+      content="Servicios de asesoría de tesis y trabajos académicos en Perú."
+    />
+    <meta
+      name="twitter:image"
+      content="https://profesorg.com/images/twitter-card.jpg"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1B2A4E" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "El Profesor G",
+        "description": "Servicios de asesoría de tesis y trabajos académicos en Perú",
+        "url": "https://profesorg.com",
+        "telephone": "+51949236795",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "PE",
+          "addressRegion": "La Libertad",
+          "addressLocality": "Trujillo"
+        },
+        "serviceType": "Asesoría académica",
+        "areaServed": "Perú"
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
     <!-- Navigation -->
-    <nav>
-        <div class="logo"><img src="images/logo_profesorG.jpeg" alt="Logo El Profesor G" /><span>El Profesor G</span></div>
-        <ul>
-                            <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#testimonios">Testimonios</a></li>
-                <li><a href="#portafolio">Portafolio</a></li>
-                <li><a href="#campanas">Campañas</a></li>
-                <li><a href="#precios">Precios</a></li>
-                
-                <li><a href="#contacto">Contacto</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+    <nav
+      class="bg-primary sticky top-0 z-50 transition-all duration-300"
+      role="navigation"
+      aria-label="Navegación principal"
+    >
+      <div class="container flex items-center justify-between py-3">
+        <div class="logo flex items-center space-x-2">
+          <img
+            src="images/logo_profesorG.jpeg"
+            alt="Logo El Profesor G"
+            class="h-10 w-auto rounded"
+            width="40"
+            height="40"
+          />
+          <span class="text-secondary font-bold text-xl">El Profesor G</span>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <ul class="hidden md:flex items-center space-x-8">
+          <li>
+            <a
+              href="#inicio"
+              class="text-white hover:text-secondary transition-colors font-medium"
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a
+              href="#sobre"
+              class="text-white hover:text-secondary transition-colors font-medium"
+              >Sobre</a
+            >
+          </li>
+          <li>
+            <a
+              href="#servicios"
+              class="text-white hover:text-secondary transition-colors font-medium"
+              >Servicios</a
+            >
+          </li>
+          <li>
+            <a
+              href="#testimonios"
+              class="text-white hover:text-secondary transition-colors font-medium"
+              >Testimonios</a
+            >
+          </li>
+          <li>
+            <a
+              href="#portafolio"
+              class="text-white hover:text-secondary transition-colors font-medium"
+              >Portafolio</a
+            >
+          </li>
+          <li>
+            <a
+              href="#precios"
+              class="text-white hover:text-secondary transition-colors font-medium"
+              >Precios</a
+            >
+          </li>
+          <li>
+            <a
+              href="#contacto"
+              class="text-white hover:text-secondary transition-colors font-medium"
+              >Contacto</a
+            >
+          </li>
         </ul>
+      </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="inicio" class="hero">
-        <div class="content">
-            <h1>¿Cansado de no avanzar con tu tesis?</h1>
-            <p>El Profesor G te lleva hasta la aprobación.<br><strong>Tu tesis, nuestra misión académica.</strong></p>
-            <a href="https://wa.me/51949236795" class="cta-button" target="_blank">Cotiza tu tesis ahora por WhatsApp</a>
-        </div>
-        <div class="image">
-            <!-- Imagen de campaña lateral para la portada -->
-            <img src="images/hero_cover.png" alt="Campaña El Profe G te salvará" />
-        </div>
-    </header>
-
-    <!-- Sobre Section -->
-    <section id="sobre" class="about">
+    <!-- Main Content -->
+    <main id="main-content">
+      <!-- Hero Section -->
+      <header class="hero bg-primary text-white section-padding" role="banner">
         <div class="container">
-            <h2>Sobre el Profesor G</h2>
-            <p>El proyecto <strong>El Profesor G</strong> nace para apoyar a estudiantes de pregrado y posgrado a culminar con éxito sus investigaciones. Gracias a años de experiencia en el ámbito académico y la redacción científica, brindamos un acompañamiento integral y cercano para que cada estudiante logre sus metas.</p>
-            <div class="mission-vision">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+              <h1 class="text-4xl lg:text-5xl font-bold text-balance">
+                ¿Cansado de no avanzar con tu tesis?
+              </h1>
+              <p class="text-xl text-gray-200">
+                El Profesor G te lleva hasta la aprobación.<br />
+                <strong class="text-secondary"
+                  >Tu tesis, nuestra misión académica.</strong
+                >
+              </p>
+              <a
+                href="https://wa.me/51949236795"
+                class="btn btn-secondary inline-flex items-center space-x-2"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contactar por WhatsApp para cotizar tesis"
+              >
+                <i class="fab fa-whatsapp text-xl" aria-hidden="true"></i>
+                <span>Cotiza tu tesis ahora por WhatsApp</span>
+              </a>
+            </div>
+            <div class="flex justify-center lg:justify-end">
+              <img
+                src="images/hero_cover.png"
+                alt="Campaña El Profe G te salvará"
+                class="max-w-full h-auto rounded-lg shadow-strong"
+                width="600"
+                height="400"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- About Section -->
+      <section
+        id="sobre"
+        class="section-padding"
+        aria-labelledby="sobre-heading"
+      >
+        <div class="container">
+          <h2
+            id="sobre-heading"
+            class="text-3xl lg:text-4xl font-bold text-center mb-8"
+          >
+            Sobre el Profesor G
+          </h2>
+          <div class="max-w-4xl mx-auto text-center mb-12">
+            <p class="text-lg text-gray-700">
+              El proyecto <strong>El Profesor G</strong> nace para apoyar a
+              estudiantes de pregrado y posgrado a culminar con éxito sus
+              investigaciones. Gracias a años de experiencia en el ámbito
+              académico y la redacción científica, brindamos un acompañamiento
+              integral y cercano para que cada estudiante logre sus metas.
+            </p>
+          </div>
+
+          <div class="mission-vision grid md:grid-cols-2 gap-8 mb-12">
+            <div class="card text-center">
+              <h3 class="text-2xl font-semibold mb-4 text-primary">Misión</h3>
+              <p class="text-gray-700">
+                Brindar asesorías académicas personalizadas, eficientes y
+                garantizadas para que la elaboración de tesis y trabajos de
+                investigación sea un proceso enriquecedor y exitoso.
+              </p>
+            </div>
+            <div class="card text-center">
+              <h3 class="text-2xl font-semibold mb-4 text-primary">Visión</h3>
+              <p class="text-gray-700">
+                Ser el servicio de tesis más confiable y accesible para
+                estudiantes universitarios de habla hispana, reconocido por su
+                excelencia académica y compromiso humano.
+              </p>
+            </div>
+          </div>
+
+          <div class="card max-w-2xl mx-auto">
+            <h3 class="text-2xl font-semibold mb-6 text-primary text-center">
+              Valores
+            </h3>
+            <ul class="grid grid-cols-2 gap-4">
+              <li class="flex items-center space-x-3">
+                <i
+                  class="fa fa-check-circle text-secondary text-xl"
+                  aria-hidden="true"
+                ></i>
+                <span class="font-medium">Compromiso</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <i
+                  class="fa fa-check-circle text-secondary text-xl"
+                  aria-hidden="true"
+                ></i>
+                <span class="font-medium">Ética</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <i
+                  class="fa fa-check-circle text-secondary text-xl"
+                  aria-hidden="true"
+                ></i>
+                <span class="font-medium">Excelencia</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <i
+                  class="fa fa-check-circle text-secondary text-xl"
+                  aria-hidden="true"
+                ></i>
+                <span class="font-medium">Puntualidad</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section
+        id="servicios"
+        class="section-padding bg-background"
+        aria-labelledby="servicios-heading"
+      >
+        <div class="container">
+          <h2
+            id="servicios-heading"
+            class="text-3xl lg:text-4xl font-bold text-center mb-12"
+          >
+            Servicios que ofrece
+          </h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Service 1 -->
+            <div class="service-card card">
+              <div class="text-center mb-4">
+                <i
+                  class="fa fa-graduation-cap text-4xl text-primary mb-4"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-xl font-semibold text-primary">
+                  Asesoría completa de tesis
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-6 flex-grow">
+                Te acompañamos en todo el proceso de tesis de pregrado y
+                posgrado, desde la formulación del problema hasta la defensa
+                final. Incluye redacción por capítulos y aplicación de normas
+                APA, Vancouver u otras.
+              </p>
+              <a href="#contacto" class="btn btn-primary w-full">Contactar</a>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card card">
+              <div class="text-center mb-4">
+                <i
+                  class="fa fa-file-lines text-4xl text-primary mb-4"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-xl font-semibold text-primary">
+                  Informes y prácticas
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-6 flex-grow">
+                Elaboramos informes de prácticas preprofesionales y trabajos de
+                suficiencia profesional con un enfoque metodológico riguroso.
+              </p>
+              <a href="#contacto" class="btn btn-primary w-full">Contactar</a>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card card">
+              <div class="text-center mb-4">
+                <i
+                  class="fa fa-newspaper text-4xl text-primary mb-4"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-xl font-semibold text-primary">
+                  Artículos científicos y monografías
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-6 flex-grow">
+                Producción de artículos científicos, monografías y proyectos de
+                investigación listos para su publicación en revistas académicas.
+              </p>
+              <a href="#contacto" class="btn btn-primary w-full">Contactar</a>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card card">
+              <div class="text-center mb-4">
+                <i
+                  class="fa fa-spell-check text-4xl text-primary mb-4"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-xl font-semibold text-primary">
+                  Corrección de estilo y similitud
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-6 flex-grow">
+                Revisamos y corregimos tu documento aplicando criterios de
+                estilo y ortografía. Detectamos similitud con Turnitin y
+                PlagScan y te ayudamos a mejorar la originalidad.
+              </p>
+              <a href="#contacto" class="btn btn-primary w-full">Contactar</a>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card card">
+              <div class="text-center mb-4">
+                <i
+                  class="fa fa-tv text-4xl text-primary mb-4"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-xl font-semibold text-primary">
+                  Presentaciones para sustentación
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-6 flex-grow">
+                Diseño de presentaciones profesionales en PowerPoint o Canva
+                para tu defensa de tesis, con gráficos y visuales impactantes.
+              </p>
+              <a href="#contacto" class="btn btn-primary w-full">Contactar</a>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card card">
+              <div class="text-center mb-4">
+                <i
+                  class="fa fa-microphone text-4xl text-primary mb-4"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-xl font-semibold text-primary">
+                  Entrenamiento para defensa
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-6 flex-grow">
+                Entrenamiento personalizado para exposición oral y defensa de
+                tesis. Mejora tu oratoria y domina las preguntas del jurado.
+              </p>
+              <a href="#contacto" class="btn btn-primary w-full">Contactar</a>
+            </div>
+
+            <!-- Service 7 -->
+            <div class="service-card card">
+              <div class="text-center mb-4">
+                <i
+                  class="fa fa-chart-column text-4xl text-primary mb-4"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-xl font-semibold text-primary">
+                  Tablas y gráficos estadísticos
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-6 flex-grow">
+                Elaboración de tablas y gráficos estadísticos utilizando SPSS,
+                Excel y Power BI, con interpretaciones claras de los resultados.
+              </p>
+              <a href="#contacto" class="btn btn-primary w-full">Contactar</a>
+            </div>
+
+            <!-- Service 8 -->
+            <div class="service-card card">
+              <div class="text-center mb-4">
+                <i
+                  class="fa fa-bolt text-4xl text-primary mb-4"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-xl font-semibold text-primary">
+                  Servicio express 48 h
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-6 flex-grow">
+                Revisión y mejora de trabajos académicos en menos de 48 horas.
+                Ideal para entregas urgentes sin sacrificar la calidad.
+              </p>
+              <a href="#contacto" class="btn btn-primary w-full">Contactar</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section
+        id="testimonios"
+        class="section-padding bg-primary text-white"
+        aria-labelledby="testimonios-heading"
+      >
+        <div class="container">
+          <h2
+            id="testimonios-heading"
+            class="text-3xl lg:text-4xl font-bold text-center mb-12"
+          >
+            Testimonios reales de estudiantes
+          </h2>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <div
+              class="testimonial-card bg-white text-primary rounded-xl p-6 text-center"
+            >
+              <img
+                src="images/student_male.png"
+                alt="Alejandro Ruiz, estudiante de Ingeniería Industrial"
+                class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
+                width="80"
+                height="80"
+                loading="lazy"
+              />
+              <h4 class="font-semibold text-lg mb-1">Alejandro Ruiz</h4>
+              <p class="text-sm text-gray-600 mb-4">
+                Universidad Privada Antenor Orrego – Ingeniería Industrial
+              </p>
+              <p class="text-gray-700 mb-4">
+                "Gracias al Profesor G terminé mi tesis en tiempo récord. Su
+                asesoría fue clara, profesional y siempre estuvo disponible para
+                resolver mis dudas."
+              </p>
+              <div class="flex justify-center space-x-1 text-secondary">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </div>
+            </div>
+
+            <div
+              class="testimonial-card bg-white text-primary rounded-xl p-6 text-center"
+            >
+              <img
+                src="images/student_female.png"
+                alt="María Torres, estudiante de Psicología"
+                class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
+                width="80"
+                height="80"
+                loading="lazy"
+              />
+              <h4 class="font-semibold text-lg mb-1">María Torres</h4>
+              <p class="text-sm text-gray-600 mb-4">
+                Universidad Cesar Vallejo – Psicología
+              </p>
+              <p class="text-gray-700 mb-4">
+                "La asesoría me dio seguridad y estructura para redactar cada
+                capítulo de mi tesis. Lo recomiendo por su ética y compromiso."
+              </p>
+              <div class="flex justify-center space-x-1 text-secondary">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </div>
+            </div>
+
+            <div
+              class="testimonial-card bg-white text-primary rounded-xl p-6 text-center"
+            >
+              <img
+                src="images/student_curly.png"
+                alt="Carlos Medina, estudiante de Derecho"
+                class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
+                width="80"
+                height="80"
+                loading="lazy"
+              />
+              <h4 class="font-semibold text-lg mb-1">Carlos Medina</h4>
+              <p class="text-sm text-gray-600 mb-4">
+                Universidad Nacional Pedro Ruiz Gallo – Derecho
+              </p>
+              <p class="text-gray-700 mb-4">
+                "Recibí orientación clara y recursos valiosos para preparar mi
+                defensa. Obtuve la aprobación sin observaciones."
+              </p>
+              <div class="flex justify-center space-x-1 text-secondary">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual testimonials -->
+          <div class="text-center">
+            <h3 class="text-2xl font-bold mb-4">Más de 100 tesis aprobadas</h3>
+            <p class="text-gray-200 mb-8 max-w-2xl mx-auto">
+              Nuestros clientes alcanzan notas sobresalientes gracias al
+              acompañamiento del Profesor G. Aquí algunas evidencias de su
+              éxito.
+            </p>
+            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div class="visual-item">
+                <img
+                  src="images/testimonial1.png"
+                  alt="Testimonio de nota 19 – UPAO"
+                  class="w-full h-auto rounded-lg shadow-medium"
+                  loading="lazy"
+                />
+              </div>
+              <div class="visual-item">
+                <img
+                  src="images/testimonial2.png"
+                  alt="Testimonio de nota 19 – UPN"
+                  class="w-full h-auto rounded-lg shadow-medium"
+                  loading="lazy"
+                />
+              </div>
+              <div class="visual-item">
+                <img
+                  src="images/testimonial3.jpg"
+                  alt="Conversación de agradecimiento – clase magistral"
+                  class="w-full h-auto rounded-lg shadow-medium"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio Section -->
+      <section
+        id="portafolio"
+        class="section-padding"
+        aria-labelledby="portafolio-heading"
+      >
+        <div class="container">
+          <h2
+            id="portafolio-heading"
+            class="text-3xl lg:text-4xl font-bold text-center mb-8"
+          >
+            Portafolio de trabajos realizados
+          </h2>
+          <p class="text-lg text-center text-gray-700 mb-12 max-w-3xl mx-auto">
+            Hemos brindado asesorías a estudiantes de diversas universidades y
+            carreras. A continuación, algunos ejemplos:
+          </p>
+
+          <div class="flex overflow-x-auto space-x-6 pb-4 mb-12">
+            <img
+              src="images/books.png"
+              alt="Tesis finalizada"
+              class="flex-shrink-0 w-80 h-auto rounded-lg shadow-soft"
+              loading="lazy"
+            />
+            <img
+              src="images/books.png"
+              alt="Proyecto de investigación"
+              class="flex-shrink-0 w-80 h-auto rounded-lg shadow-soft"
+              loading="lazy"
+            />
+            <img
+              src="images/books.png"
+              alt="Trabajo académico"
+              class="flex-shrink-0 w-80 h-auto rounded-lg shadow-soft"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-12">
+            <div class="card">
+              <h3 class="text-2xl font-semibold mb-6 text-primary">
+                Universidades atendidas
+              </h3>
+              <ul class="space-y-3">
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-university text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>UPAO – Universidad Privada Antenor Orrego</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-university text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>UCV – Universidad Cesar Vallejo</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-university text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>UPN – Universidad Privada del Norte</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-university text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>UNPRG – Universidad Nacional Pedro Ruiz Gallo</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-university text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Otras universidades de Perú y Latinoamérica</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3 class="text-2xl font-semibold mb-6 text-primary">
+                Carreras atendidas
+              </h3>
+              <ul class="space-y-3">
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-graduation-cap text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Ingeniería (Industrial, Civil, Sistemas)</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-graduation-cap text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Administración y Negocios</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-graduation-cap text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Psicología</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-graduation-cap text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Derecho</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-graduation-cap text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Educación</span>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <i
+                    class="fa fa-graduation-cap text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Odontología y Medicina</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Section -->
+      <section
+        id="precios"
+        class="section-padding bg-background"
+        aria-labelledby="precios-heading"
+      >
+        <div class="container">
+          <h2
+            id="precios-heading"
+            class="text-3xl lg:text-4xl font-bold text-center mb-8"
+          >
+            Nuestros precios
+          </h2>
+          <p class="text-lg text-center text-gray-700 mb-12 max-w-4xl mx-auto">
+            Encuentra la opción que mejor se adapte a tus necesidades
+            académicas. Todos nuestros paquetes están diseñados para brindarte
+            un acompañamiento personalizado y garantizar tu éxito.
+          </p>
+
+          <!-- Career packages -->
+          <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="precio-card card">
+              <div class="flex items-center space-x-4 mb-6">
+                <i
+                  class="fa fa-industry text-4xl text-secondary"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-2xl font-semibold text-primary">
+                  Ingeniería Industrial
+                </h3>
+              </div>
+              <ul class="space-y-3">
+                <li><strong>Tesis de titulación:</strong> S/ 3,500</li>
+                <li>
+                  <strong>Tesis de pregrado IIND (Tesis 1):</strong> S/ 1,250
+                </li>
+                <li>
+                  <strong>Tesis de pregrado IIND (Tesis 2):</strong> S/ 1,750
+                </li>
+                <li>
+                  <strong>Proyecto de investigación IIND:</strong> S/ 1,000
+                </li>
+                <li>
+                  <strong>Informe de prácticas preprofesionales IIND:</strong>
+                  S/ 1,250
+                </li>
+              </ul>
+            </div>
+
+            <div class="precio-card card">
+              <div class="flex items-center space-x-4 mb-6">
+                <i
+                  class="fa fa-briefcase text-4xl text-secondary"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-2xl font-semibold text-primary">
+                  Administración
+                </h3>
+              </div>
+              <ul class="space-y-3">
+                <li><strong>Tesis de titulación:</strong> S/ 3,000</li>
+                <li>
+                  <strong>Tesis de pregrado ADM (Tesis 1):</strong> S/ 1,000
+                </li>
+                <li>
+                  <strong>Tesis de pregrado ADM (Tesis 2):</strong> S/ 1,250
+                </li>
+                <li><strong>Proyecto de investigación ADM:</strong> S/ 750</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Additional services -->
+          <div class="card mb-8">
+            <h3 class="text-2xl font-semibold mb-6 text-primary">
+              Servicios académicos adicionales
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <strong>Diagnóstico de tesis (Zoom 40 min):</strong> S/ 80
+              </li>
+              <li>
+                <strong
+                  >Definición de tema de investigación (Zoom 40 min):</strong
+                >
+                S/ 80
+              </li>
+              <li>
+                <strong
+                  >Proyectos de cursos importantes (PCO, Simulación,
+                  Formulación):</strong
+                >
+                S/ 500 a S/ 750 (según la dificultad)
+              </li>
+            </ul>
+          </div>
+
+          <!-- Notes and deliverables -->
+          <div class="card mb-8 bg-blue-50 border-l-4 border-primary">
+            <div class="space-y-4 text-sm">
+              <p>
+                <strong>Nota:</strong> Los precios mostrados son por persona. Si
+                el proyecto es en grupo de dos personas, se añade un 20%
+                adicional al monto.
+              </p>
+              <p>
+                <strong>Archivos incluidos:</strong> De acuerdo con tu proyecto,
+                recibirás los documentos finales en formatos Word, PDF, Excel,
+                PowerPoint y, cuando aplique, en SPSS, MINITAB, ARENA, BIZAGI,
+                VISIO, MS Project o LINGO.
+              </p>
+              <p class="italic text-primary">
+                <em
+                  >La elaboración de presentaciones en PowerPoint para
+                  sustentación es un servicio adicional, con un costo entre S/
+                  200 y S/ 350 según el nivel de información y
+                  personalización.</em
+                >
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA button -->
+          <div class="text-center">
+            <a
+              href="https://wa.me/51949236795"
+              class="btn btn-secondary inline-flex items-center space-x-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-whatsapp text-xl" aria-hidden="true"></i>
+              <span>Cotiza tu tesis ahora por WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Promotions Section -->
+      <section
+        id="promociones"
+        class="section-padding bg-primary text-white"
+        aria-labelledby="promociones-heading"
+      >
+        <div class="container">
+          <div class="max-w-4xl mx-auto text-center mb-12">
+            <h2
+              id="promociones-heading"
+              class="text-3xl lg:text-4xl font-bold mb-8"
+            >
+              Promociones y sorteos
+            </h2>
+            <p class="text-lg text-gray-200 mb-6">
+              Participa en la
+              <strong class="text-secondary">Ruleta del Profesor G</strong> y
+              gana increíbles premios:
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-center justify-center space-x-3">
+                <i
+                  class="fa fa-check-circle text-secondary"
+                  aria-hidden="true"
+                ></i>
+                <span>Descuentos del 10% y 25%</span>
+              </li>
+              <li class="flex items-center justify-center space-x-3">
+                <i
+                  class="fa fa-check-circle text-secondary"
+                  aria-hidden="true"
+                ></i>
+                <span>Premios de hasta S/ 500</span>
+              </li>
+              <li class="flex items-center justify-center space-x-3">
+                <i
+                  class="fa fa-check-circle text-secondary"
+                  aria-hidden="true"
+                ></i>
+                <span>Servicios gratuitos y asesorías</span>
+              </li>
+            </ul>
+            <p class="text-gray-200">
+              ¿Cómo participar? Sigue nuestra cuenta en TikTok, toma una captura
+              de pantalla de tu premio y envíala a nuestro WhatsApp +51 949 236
+              795 o al TikTok del Profesor G. Completa tus datos para que
+              podamos contactarte. ¡Sorteos mensuales y sorpresas para nuestra
+              comunidad!
+            </p>
+          </div>
+
+          <div class="flex justify-center">
+            <div class="w-full max-w-2xl">
+              <!-- Ruleta interactiva -->
+              <div
+                data-as-widget="f2br3QI6"
+                data-as-app="fortune-wheel"
+                class="w-full h-96 md:h-[750px] rounded-lg overflow-hidden"
+                aria-label="Ruleta de premios del Profesor G"
+              ></div>
+              <script
+                src="https://app-sorteos.com/embed/embed.js"
+                data-promotion="f2br3QI6"
+                defer
+              ></script>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section
+        id="contacto"
+        class="section-padding bg-background"
+        aria-labelledby="contacto-heading"
+      >
+        <div class="container">
+          <div class="max-w-4xl mx-auto">
+            <h2
+              id="contacto-heading"
+              class="text-3xl lg:text-4xl font-bold text-center mb-8"
+            >
+              Contacto
+            </h2>
+            <p class="text-lg text-center text-gray-700 mb-12">
+              ¿Listo para empezar? Déjanos tus datos y nos comunicaremos contigo
+              lo antes posible.
+            </p>
+
+            <form id="contact-form" class="card space-y-6" novalidate>
+              <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                    <h3>Misión</h3>
-                    <p>Brindar asesorías académicas personalizadas, eficientes y garantizadas para que la elaboración de tesis y trabajos de investigación sea un proceso enriquecedor y exitoso.</p>
+                  <label
+                    for="nombre"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Nombre completo *
+                  </label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent transition-colors"
+                    aria-describedby="nombre-error"
+                  />
                 </div>
                 <div>
-                    <h3>Visión</h3>
-                    <p>Ser el servicio de tesis más confiable y accesible para estudiantes universitarios de habla hispana, reconocido por su excelencia académica y compromiso humano.</p>
+                  <label
+                    for="correo"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Correo electrónico *
+                  </label>
+                  <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent transition-colors"
+                    aria-describedby="correo-error"
+                  />
                 </div>
-            </div>
-            <div class="valores">
-                <h3>Valores</h3>
-                <ul>
-                    <li><i class="fa fa-check-circle"></i> Compromiso</li>
-                    <li><i class="fa fa-check-circle"></i> Ética</li>
-                    <li><i class="fa fa-check-circle"></i> Excelencia</li>
-                    <li><i class="fa fa-check-circle"></i> Puntualidad</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+              </div>
 
-    <!-- Servicios Section -->
-    <section id="servicios" class="services">
-        <div class="container">
-            <h2>Servicios que ofrece</h2>
-            <div class="grid">
-                <!-- Servicio 1 -->
-                <div class="service-card">
-                    <i class="fa fa-graduation-cap"></i>
-                    <h3>Asesoría completa de tesis</h3>
-                    <p>Te acompañamos en todo el proceso de tesis de pregrado y posgrado, desde la formulación del problema hasta la defensa final. Incluye redacción por capítulos y aplicación de normas APA, Vancouver u otras.</p>
-                    <a href="#contacto" class="btn">Contactar</a>
-                </div>
-                <!-- Servicio 2 -->
-                <div class="service-card">
-                    <i class="fa fa-file-lines"></i>
-                    <h3>Informes y prácticas</h3>
-                    <p>Elaboramos informes de prácticas preprofesionales y trabajos de suficiencia profesional con un enfoque metodológico riguroso.</p>
-                    <a href="#contacto" class="btn">Contactar</a>
-                </div>
-                <!-- Servicio 3 -->
-                <div class="service-card">
-                    <i class="fa fa-newspaper"></i>
-                    <h3>Artículos científicos y monografías</h3>
-                    <p>Producción de artículos científicos, monografías y proyectos de investigación listos para su publicación en revistas académicas.</p>
-                    <a href="#contacto" class="btn">Contactar</a>
-                </div>
-                <!-- Servicio 4 -->
-                <div class="service-card">
-                    <i class="fa fa-spell-check"></i>
-                    <h3>Corrección de estilo y similitud</h3>
-                    <p>Revisamos y corregimos tu documento aplicando criterios de estilo y ortografía. Detectamos similitud con Turnitin y PlagScan y te ayudamos a mejorar la originalidad.</p>
-                    <a href="#contacto" class="btn">Contactar</a>
-                </div>
-                <!-- Servicio 5 -->
-                <div class="service-card">
-                    <i class="fa fa-tv"></i>
-                    <h3>Presentaciones para sustentación</h3>
-                    <p>Diseño de presentaciones profesionales en PowerPoint o Canva para tu defensa de tesis, con gráficos y visuales impactantes.</p>
-                    <a href="#contacto" class="btn">Contactar</a>
-                </div>
-                <!-- Servicio 6 -->
-                <div class="service-card">
-                    <i class="fa fa-microphone"></i>
-                    <h3>Entrenamiento para defensa</h3>
-                    <p>Entrenamiento personalizado para exposición oral y defensa de tesis. Mejora tu oratoria y domina las preguntas del jurado.</p>
-                    <a href="#contacto" class="btn">Contactar</a>
-                </div>
-                <!-- Servicio 7 -->
-                <div class="service-card">
-                    <i class="fa fa-chart-column"></i>
-                    <h3>Tablas y gráficos estadísticos</h3>
-                    <p>Elaboración de tablas y gráficos estadísticos utilizando SPSS, Excel y Power BI, con interpretaciones claras de los resultados.</p>
-                    <a href="#contacto" class="btn">Contactar</a>
-                </div>
-                <!-- Servicio 8 -->
-                <div class="service-card">
-                    <i class="fa fa-bolt"></i>
-                    <h3>Servicio express 48 h</h3>
-                    <p>Revisión y mejora de trabajos académicos en menos de 48 horas. Ideal para entregas urgentes sin sacrificar la calidad.</p>
-                    <a href="#contacto" class="btn">Contactar</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonios Section -->
-    <section id="testimonios" class="testimonials">
-        <div class="container">
-            <h2>Testimonios reales de estudiantes</h2>
-            <div class="cards">
-                <div class="testimonial-card">
-                    <img src="images/student_male.png" alt="Estudiante masculino" />
-                    <h4>Alejandro Ruiz</h4>
-                    <small>Universidad Privada Antenor Orrego – Ingeniería Industrial</small>
-                    <p>“Gracias al Profesor G terminé mi tesis en tiempo récord. Su asesoría fue clara, profesional y siempre estuvo disponible para resolver mis dudas.”</p>
-                    <div class="stars">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <img src="images/student_female.png" alt="Estudiante femenina" />
-                    <h4>María Torres</h4>
-                    <small>Universidad Cesar Vallejo – Psicología</small>
-                    <p>“La asesoría me dio seguridad y estructura para redactar cada capítulo de mi tesis. Lo recomiendo por su ética y compromiso.”</p>
-                    <div class="stars">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <img src="images/student_curly.png" alt="Estudiante con cabello rizado" />
-                    <h4>Carlos Medina</h4>
-                    <small>Universidad Nacional Pedro Ruiz Gallo – Derecho</small>
-                    <p>“Recibí orientación clara y recursos valiosos para preparar mi defensa. Obtuve la aprobación sin observaciones.”</p>
-                    <div class="stars">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            <!-- Visual testimonials: imágenes de conversaciones reales y notas -->
-            <div class="testimonial-visual">
-                <h3 class="visual-heading">Más de 100 tesis aprobadas</h3>
-                <p class="visual-subheading">Nuestros clientes alcanzan notas sobresalientes gracias al acompañamiento del Profesor&nbsp;G. Aquí algunas evidencias de su éxito.</p>
-                <div class="visual-grid">
-                    <div class="visual-item">
-                        <img src="images/testimonial1.png" alt="Testimonio de nota 19 – UPAO" />
-                    </div>
-                    <div class="visual-item">
-                        <img src="images/testimonial2.png" alt="Testimonio de nota 19 – UPN" />
-                    </div>
-                    <div class="visual-item">
-                        <img src="images/testimonial3.jpg" alt="Conversación de agradecimiento – clase magistral" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portafolio Section -->
-    <section id="portafolio" class="portfolio">
-        <div class="container">
-            <h2>Portafolio de trabajos realizados</h2>
-            <p>Hemos brindado asesorías a estudiantes de diversas universidades y carreras. A continuación, algunos ejemplos:</p>
-            <div class="carousel">
-                <img src="images/books.png" alt="Tesis finalizada" />
-                <img src="images/books.png" alt="Proyecto de investigación" />
-                <img src="images/books.png" alt="Trabajo académico" />
-            </div>
-            <div class="universidades-carreras">
+              <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                    <h3>Universidades atendidas</h3>
-                    <ul>
-                        <li>UPAO – Universidad Privada Antenor Orrego</li>
-                        <li>UCV – Universidad Cesar Vallejo</li>
-                        <li>UPN – Universidad Privada del Norte</li>
-                        <li>UNPRG – Universidad Nacional Pedro Ruiz Gallo</li>
-                        <li>Otras universidades de Perú y Latinoamérica</li>
-                    </ul>
+                  <label
+                    for="universidad"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Universidad
+                  </label>
+                  <input
+                    type="text"
+                    id="universidad"
+                    name="universidad"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent transition-colors"
+                  />
                 </div>
                 <div>
-                    <h3>Carreras atendidas</h3>
-                    <ul>
-                        <li>Ingeniería (Industrial, Civil, Sistemas)</li>
-                        <li>Administración y Negocios</li>
-                        <li>Psicología</li>
-                        <li>Derecho</li>
-                        <li>Educación</li>
-                        <li>Odontología y Medicina</li>
-                    </ul>
+                  <label
+                    for="carrera"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Carrera
+                  </label>
+                  <input
+                    type="text"
+                    id="carrera"
+                    name="carrera"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent transition-colors"
+                  />
                 </div>
-            </div>
-        </div>
-    </section>
+              </div>
 
-    <!-- Campañas Universitarias Section -->
-    <section id="campanas-old" class="promos" style="display:none">
-
-
-        <div class="container">
-            <h2>Campañas universitarias</h2>
-            <p>Conoce algunas de las campañas promocionales que hemos realizado en colaboración con diversas universidades. Estas imágenes reflejan nuestra presencia y compromiso con la comunidad académica en Ingeniería Industrial, Administración y otras carreras.</p>
-            <div class="promo-grid">
-                <div class="promo-card">
-                    <img src="images/promo_upao.png" alt="Campaña UPAO – Proyectos de tesis" />
-                </div>
-                <div class="promo-card">
-                    <img src="images/promo_green.png" alt="Campaña de asesoramiento de proyectos – Ingeniería Industrial, Administración y Marketing" />
-                </div>
-                <div class="promo-card">
-                    <img src="images/promo_ucv1.png" alt="Campaña UCV – Llegó a la UCV" />
-                </div>
-                <div class="promo-card">
-                    <img src="images/promo_ucv2.png" alt="Campaña UCV – Asesoría proyectos de tesis" />
-                </div>
-                <div class="promo-card">
-                    <img src="images/promo_upn1.png" alt="Campaña UPN – Asesoría especializada Tesis 2" />
-                </div>
-                <div class="promo-card">
-                    <img src="images/promo_upn2.png" alt="Campaña UPN – Separa tu cupo Tesis 1 y Tesis 2" />
-                </div>
-                <div class="promo-card">
-                    <img src="images/promo_upn3.png" alt="Campaña UPN – Último día para separar T1" />
-                </div>
-                <div class="promo-card">
-                    <img src="images/promo_upn4.png" alt="Campaña UPN – El Profe G te salvará" />
-                </div>
-                <div class="promo-card">
-                    <img src="images/promo_upao2.png" alt="Campaña UPAO – El Profe G te ayudará con tu investigación" />
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Precios Section: nuestros planes y tarifas -->
-    <section id="precios" class="pricing-section">
-        <div class="container">
-            <h2>Nuestros precios</h2>
-            <p class="section-intro">Encuentra la opción que mejor se adapte a tus necesidades académicas. Todos nuestros paquetes están diseñados para brindarte un acompañamiento personalizado y garantizar tu éxito.</p>
-            <!-- Paquetes de tesis y proyectos por carrera -->
-            <div class="precios-grid">
-                <div class="precio-card">
-                    <div class="precio-header">
-                        <i class="fa fa-industry"></i>
-                        <h3>Ingeniería&nbsp;Industrial</h3>
-                    </div>
-                    <ul class="precio-list">
-                        <li><strong>Tesis de titulación:</strong> S/ 3 500</li>
-                        <li><strong>Tesis de pregrado IIND (Tesis 1):</strong> S/ 1 250</li>
-                        <li><strong>Tesis de pregrado IIND (Tesis 2):</strong> S/ 1 750</li>
-                        <li><strong>Proyecto de investigación IIND:</strong> S/ 1 000</li>
-                        <li><strong>Informe de prácticas preprofesionales IIND:</strong> S/ 1 250</li>
-                    </ul>
-                </div>
-                <div class="precio-card">
-                    <div class="precio-header">
-                        <i class="fa fa-briefcase"></i>
-                        <h3>Administración</h3>
-                    </div>
-                    <ul class="precio-list">
-                        <li><strong>Tesis de titulación:</strong> S/ 3 000</li>
-                        <li><strong>Tesis de pregrado ADM (Tesis 1):</strong> S/ 1 000</li>
-                        <li><strong>Tesis de pregrado ADM (Tesis 2):</strong> S/ 1 250</li>
-                        <li><strong>Proyecto de investigación ADM:</strong> S/ 750</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Servicios académicos adicionales -->
-            <div class="precios-adicionales">
-                <h3>Servicios académicos adicionales</h3>
-                <ul class="adicionales-list">
-                    <li><strong>Diagnóstico de tesis (Zoom 40 min):</strong> S/ 80</li>
-                    <li><strong>Definición de tema de investigación (Zoom 40 min):</strong> S/ 80</li>
-                    <li><strong>Proyectos de cursos importantes (PCO, Simulación, Formulación):</strong> S/ 500 a S/ 750 (según la dificultad)</li>
-                </ul>
-            </div>
-            <!-- Notas y entregables -->
-            <div class="precios-notas">
-                <p><strong>Nota:</strong> Los precios mostrados son por persona. Si el proyecto es en grupo de dos personas, se añade un 20 % adicional al monto.</p>
-                <p><strong>Archivos incluidos:</strong> De acuerdo con tu proyecto, recibirás los documentos finales en formatos Word, PDF, Excel, PowerPoint y, cuando aplique, en SPSS, MINITAB, ARENA, BIZAGI, VISIO, MS Project o LINGO.</p>
-                <p><em>La elaboración de presentaciones en PowerPoint para sustentación es un servicio adicional, con un costo entre S/ 200 y S/ 350 según el nivel de información y personalización.</em></p>
-            </div>
-            <!-- CTA botón -->
-            <div class="cta-precios">
-                <a href="https://wa.me/51949236795" class="btn cta-precio-btn" target="_blank">Cotiza tu tesis ahora por WhatsApp</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Promociones y Sorteos Section -->
-    <section id="promociones" class="promotion">
-        <div class="container">
-            <div class="info">
-                <h2>Promociones y sorteos</h2>
-                <p>Participa en la <strong>Ruleta del Profesor G</strong> y gana increíbles premios:</p>
-                <ul>
-                    <li>Descuentos del 10 % y 25 %</li>
-                    <li>Premios de hasta S/ 500</li>
-                    <li>Servicios gratuitos y asesorías</li>
-                </ul>
-                <p>¿Cómo participar? Sigue nuestra cuenta en TikTok, toma una captura de pantalla de tu premio y envíala a nuestro WhatsApp +51 949 236 795 o al TikTok del Profesor G. Completa tus datos para que podamos contactarte. ¡Sorteos mensuales y sorpresas para nuestra comunidad!</p>
-            </div>
-        </div>
-        <div class="wheel-wrapper">
-            <!-- Ruleta interactiva proporcionada por app-sorteos.com -->
-            <div data-as-widget="f2br3QI6" data-as-app="fortune-wheel" style="width:100%;height:750px;"></div>
-            <script src="https://app-sorteos.com/embed/embed.js" data-promotion="f2br3QI6" defer></script>
-        </div>
-    </section>
-
-    <!-- Contacto Section -->
-    <section id="contacto" class="contact">
-        <div class="container">
-            <h2>Contacto</h2>
-            <p>¿Listo para empezar? Déjanos tus datos y nos comunicaremos contigo lo antes posible.</p>
-            <form onsubmit="return false;">
-                <input type="text" name="nombre" placeholder="Nombre completo" required />
-                <input type="email" name="correo" placeholder="Correo electrónico" required />
-                <input type="text" name="universidad" placeholder="Universidad" />
-                <input type="text" name="carrera" placeholder="Carrera" />
-                <select name="tipo">
-                    <option value="tesis">Tesis</option>
-                    <option value="informe">Informe académico</option>
-                    <option value="articulo">Artículo científico</option>
-                    <option value="otro">Otro</option>
+              <div>
+                <label
+                  for="tipo"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Tipo de trabajo
+                </label>
+                <select
+                  id="tipo"
+                  name="tipo"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent transition-colors"
+                >
+                  <option value="tesis">Tesis</option>
+                  <option value="informe">Informe académico</option>
+                  <option value="articulo">Artículo científico</option>
+                  <option value="otro">Otro</option>
                 </select>
-                <textarea name="mensaje" class="full" rows="4" placeholder="Cuéntanos más sobre tu trabajo"></textarea>
-                <button type="submit">Enviar mensaje</button>
+              </div>
+
+              <div>
+                <label
+                  for="mensaje"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Cuéntanos más sobre tu trabajo *
+                </label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  rows="4"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent transition-colors resize-vertical"
+                  aria-describedby="mensaje-error"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-full text-lg py-4">
+                Enviar mensaje
+              </button>
             </form>
-            <p style="margin-top:20px;">O contáctanos directamente por WhatsApp: <a href="https://wa.me/51949236795" target="_blank" style="color:var(--primary); font-weight:bold;">+51 949 236 795</a></p>
-        </div>
-    </section>
 
-    <!-- Calendly Embed (placeholder) -->
-    <section class="calendly">
-        <div class="container">
-            <h2>Agenda una cita</h2>
-            <p>Reserva una reunión de orientación con el Profesor G y aclara todas tus dudas.</p>
-            <!-- Calendly inline widget: reemplazar la URL con tu enlace de Calendly -->
-            <div class="calendly-inline-widget" data-url="https://calendly.com/tu-enlace" style="min-width:320px; height:630px;"></div>
+            <div class="text-center mt-8">
+              <p class="text-gray-700">
+                O contáctanos directamente por WhatsApp:
+                <a
+                  href="https://wa.me/51949236795"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-primary font-semibold hover:text-secondary transition-colors"
+                >
+                  +51 949 236 795
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Pie de página -->
-    <footer>
-        <p>&copy; 2025 El Profesor G. Todos los derechos reservados.</p>
-        <p>
-            <a href="#">Términos y condiciones</a> |
-            <a href="#">Política de privacidad</a> |
-            <a href="#">Aviso legal</a>
-        </p>
-        <p>Síguenos en:
-            <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-        </p>
+      <!-- Calendly Section -->
+      <section id="cita" class="section-padding" aria-labelledby="cita-heading">
+        <div class="container text-center">
+          <h2 id="cita-heading" class="text-3xl lg:text-4xl font-bold mb-8">
+            Agenda una cita
+          </h2>
+          <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+            Reserva una reunión de orientación con el Profesor G y aclara todas
+            tus dudas.
+          </p>
+          <!-- Calendly inline widget -->
+          <div
+            class="calendly-inline-widget bg-white rounded-lg shadow-soft overflow-hidden"
+            data-url="https://calendly.com/tu-enlace"
+            style="min-width: 320px; height: 630px"
+            aria-label="Widget de programación de citas con Calendly"
+          ></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white section-padding" role="contentinfo">
+      <div class="container text-center space-y-6">
+        <p>&copy; 2025 El Profesor G. Todos los derechos reservados.</p>
+        <div class="flex flex-wrap justify-center gap-6 text-sm">
+          <a href="#" class="text-secondary hover:text-white transition-colors"
+            >Términos y condiciones</a
+          >
+          <a href="#" class="text-secondary hover:text-white transition-colors"
+            >Política de privacidad</a
+          >
+          <a href="#" class="text-secondary hover:text-white transition-colors"
+            >Aviso legal</a
+          >
+        </div>
+        <div class="flex justify-center space-x-6">
+          <a
+            href="https://www.tiktok.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-secondary hover:text-white transition-colors"
+            aria-label="Síguenos en TikTok"
+          >
+            <i class="fab fa-tiktok text-2xl" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-secondary hover:text-white transition-colors"
+            aria-label="Síguenos en Instagram"
+          >
+            <i class="fab fa-instagram text-2xl" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-secondary hover:text-white transition-colors"
+            aria-label="Síguenos en Facebook"
+          >
+            <i class="fab fa-facebook text-2xl" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
     </footer>
 
-    <!-- Cookie banner -->
-    <div id="cookie-banner" class="cookie-banner">
-        <span>Usamos cookies para mejorar tu experiencia en nuestro sitio. Consulta nuestra <a href="#" style="color:var(--secondary); text-decoration:underline;">política de cookies</a>.</span>
-        <button id="accept-cookies">Aceptar</button>
+    <!-- Cookie Banner -->
+    <div
+      id="cookie-banner"
+      class="fixed bottom-0 left-0 right-0 bg-primary text-white p-4 shadow-strong z-50 hidden"
+      role="dialog"
+      aria-labelledby="cookie-title"
+      aria-describedby="cookie-description"
+    >
+      <div
+        class="container flex flex-col sm:flex-row items-center justify-between gap-4"
+      >
+        <div class="flex-1">
+          <p id="cookie-description" class="text-sm">
+            Usamos cookies para mejorar tu experiencia en nuestro sitio.
+            Consulta nuestra
+            <a
+              href="#"
+              class="text-secondary underline hover:text-white transition-colors"
+              >política de cookies</a
+            >.
+          </p>
+        </div>
+        <button
+          id="accept-cookies"
+          class="btn btn-secondary px-6 py-2 text-sm whitespace-nowrap"
+        >
+          Aceptar
+        </button>
+      </div>
     </div>
 
-    <!-- Botón flotante de WhatsApp -->
-    <a href="https://wa.me/51949236795" class="whatsapp-float" target="_blank" aria-label="Cotiza tu tesis ahora por WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-text">Cotiza tu tesis ahora</span>
+    <!-- WhatsApp Float Button -->
+    <a
+      href="https://wa.me/51949236795"
+      class="fixed bottom-6 right-6 bg-secondary text-primary p-4 rounded-full shadow-strong hover:bg-secondary-600 hover:text-white transition-all duration-300 z-40 flex items-center space-x-2"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Cotiza tu tesis ahora por WhatsApp"
+    >
+      <i class="fab fa-whatsapp text-2xl" aria-hidden="true"></i>
+      <span class="hidden sm:inline font-medium">Cotiza tu tesis ahora</span>
     </a>
 
-    <!-- External scripts -->
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <!-- Custom JS -->
-    <script src="js/script.js"></script>
-    <!-- Fonts script credit (open-source fonts) information snippet for citation: Google Fonts indicates that their catalog consists of open‑source fonts and icons which can be integrated into websites worldwide【872034536803849†L13-L16】. -->
-</body>
+    <!-- Scripts -->
+    <script type="module" src="/src/scripts/main.js"></script>
+  </body>
 </html>

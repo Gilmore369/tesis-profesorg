@@ -1,0 +1,230 @@
+#!/usr/bin/env node
+
+import { execSync } from 'child_process';
+import { promises as fs } from 'fs';
+
+const LIGHTHOUSE_THRESHOLDS = {
+  performance: 90,
+  accessibility: 90,
+  'best-practices': 90,
+  seo: 90,
+};
+
+const CORE_WEB_VITALS_THRESHOLDS = {
+  lcp: 2500, // ms
+  fid: 100, // ms
+  cls: 0.1, // score
+};
+
+async function runLighthouse(url = 'http://localhost:4173') {
+  console.log('🔍 Running Lighthouse audit...\n');
+
+  try {
+    // Run Lighthouse and save results
+    const command = `npx lighthouse ${url} --output=json --output-path=./lighthouse-results.json --chrome-flags="--headless --no-sandbox"`;
+    execSync(command, { stdio: 'inherit' });
+
+    // Read results
+    const resultsJson = await fs.readFile('./lighthouse-results.json', 'utf8');
+    const results = JSON.parse(resultsJson);
+
+    return results;
+  } catch (error) {
+    console.error('❌ Error running Lighthouse:', error.message);
+    throw error;
+  }
+}
+
+function analyzeResults(results) {
+  const categories = results.lhr.categories;
+  const audits = results.lhr.audits;
+
+  console.log('📊 Lighthouse Results:\n');
+
+  const scores = {};
+  let allPassed = true;
+
+  // Check category scores
+  Object.entries(categories).forEach(([key, category]) => {
+    const score = Math.round(category.score * 100);
+    const threshold = LIGHTHOUSE_THRESHOLDS[key];
+    const passed = score >= threshold;
+
+    scores[key] = score;
+
+    if (!passed) allPassed = false;
+
+    const status = passed ? '✅' : '❌';
+    console.log(
+      `${status} ${category.title}: ${score}/100 (threshold: ${threshold})`
+    );
+  });
+
+  console.log('\n🎯 Core Web Vitals:\n');
+
+  // Check Core Web Vitals
+  const lcp = audits['largest-contentful-paint']?.numericValue;
+  const fid = audits['max-potential-fid']?.numericValue; // Use max potential FID as proxy
+  const cls = audits['cumulative-layout-shift']?.numericValue;
+
+  if (lcp !== undefined) {
+    const passed = lcp <= CORE_WEB_VITALS_THRESHOLDS.lcp;
+    const status = passed ? '✅' : '❌';
+    console.log(
+      `${status} LCP: ${Math.round(lcp)}ms (threshold: ${CORE_WEB_VITALS_THRESHOLDS.lcp}ms)`
+    );
+    if (!passed) allPassed = false;
+  }
+
+  if (fid !== undefined) {
+    const passed = fid <= CORE_WEB_VITALS_THRESHOLDS.fid;
+    const status = passed ? '✅' : '❌';
+    console.log(
+      `${status} Max Potential FID: ${Math.round(fid)}ms (threshold: ${CORE_WEB_VITALS_THRESHOLDS.fid}ms)`
+    );
+    if (!passed) allPassed = false;
+  }
+
+  if (cls !== undefined) {
+    const passed = cls <= CORE_WEB_VITALS_THRESHOLDS.cls;
+    const status = passed ? '✅' : '❌';
+    console.log(
+      `${status} CLS: ${cls.toFixed(3)} (threshold: ${CORE_WEB_VITALS_THRESHOLDS.cls})`
+    );
+    if (!passed) allPassed = false;
+  }
+
+  // Show opportunities for improvement
+  console.log('\n💡 Opportunities for Improvement:\n');
+
+  const opportunities = Object.values(audits)
+    .filter(
+      audit => audit.details?.type === 'opportunity' && audit.numericValue > 0
+    )
+    .sort((a, b) => b.numericValue - a.numericValue)
+    .slice(0, 5);
+
+  if (opportunities.length > 0) {
+    opportunities.forEach(audit => {
+      const savings = Math.round(audit.numericValue);
+      console.log(`• ${audit.title}: ${savings}ms potential savings`);
+    });
+  } else {
+    console.log('🎉 No major optimization opportunities found!');
+  }
+
+  // Show diagnostics
+  console.log('\n🔧 Diagnostics:\n');
+
+  const diagnostics = Object.values(audits)
+    .filter(
+      audit =>
+        audit.details?.type === 'diagnostic' &&
+        audit.score !== null &&
+        audit.score < 1
+    )
+    .sort((a, b) => a.score - b.score)
+    .slice(0, 3);
+
+  if (diagnostics.length > 0) {
+    diagnostics.forEach(audit => {
+      console.log(
+        `• ${audit.title}: ${audit.displayValue || 'Check required'}`
+      );
+    });
+  } else {
+    console.log('✅ All diagnostics passed!');
+  }
+
+  return { scores, allPassed };
+}
+
+function generateReport(scores, allPassed) {
+  const timestamp = new Date().toISOString();
+
+  const report = `# Performance Report
+
+**Generated:** ${timestamp}
+
+## Lighthouse Scores
+
+| Category | Score | Status |
+|----------|-------|--------|
+| Performance | ${scores.performance}/100 | ${scores.performance >= 90 ? '✅' : '❌'} |
+| Accessibility | ${scores.accessibility}/100 | ${scores.accessibility >= 90 ? '✅' : '❌'} |
+| Best Practices | ${scores['best-practices']}/100 | ${scores['best-practices'] >= 90 ? '✅' : '❌'} |
+| SEO | ${scores.seo}/100 | ${scores.seo >= 90 ? '✅' : '❌'} |
+
+## Overall Status
+
+${allPassed ? '✅ **PASSED** - All thresholds met!' : '❌ **FAILED** - Some thresholds not met'}
+
+## Next Steps
+
+${
+  allPassed
+    ? '🚀 Website is ready for production deployment!'
+    : '🔧 Review the opportunities and diagnostics above to improve performance.'
+}
+
+---
+*Report generated by performance-check.js*
+`;
+
+  return report;
+}
+
+async function main() {
+  console.log('🚀 Starting Performance Check...\n');
+
+  try {
+    // Check if server is running
+    try {
+      execSync('curl -f http://localhost:4173 > /dev/null 2>&1');
+    } catch {
+      console.log('⚠️  Local server not detected. Starting preview server...');
+      console.log('Run: npm run preview\n');
+      process.exit(1);
+    }
+
+    // Run Lighthouse audit
+    const results = await runLighthouse();
+
+    // Analyze results
+    const { scores, allPassed } = analyzeResults(results);
+
+    // Generate report
+    const report = generateReport(scores, allPassed);
+    await fs.writeFile('./performance-report.md', report);
+
+    console.log('\n📄 Report saved to: performance-report.md');
+
+    // Clean up
+    try {
+      await fs.unlink('./lighthouse-results.json');
+    } catch {
+      // Ignore cleanup errors
+    }
+
+    // Exit with appropriate code
+    if (allPassed) {
+      console.log('\n🎉 All performance checks passed!');
+      process.exit(0);
+    } else {
+      console.log(
+        '\n⚠️  Some performance checks failed. Review the report for details.'
+      );
+      process.exit(1);
+    }
+  } catch (error) {
+    console.error('\n❌ Performance check failed:', error.message);
+    process.exit(1);
+  }
+}
+
+// Run if called directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main();
+}
+
+export { main };
